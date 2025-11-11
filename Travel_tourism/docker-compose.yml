@@ -1,0 +1,49 @@
+services:
+  db:
+    image: postgres:15
+    container_name: travel_db
+    environment:
+      POSTGRES_USER: travel_user
+      POSTGRES_PASSWORD: "123456"
+      POSTGRES_DB: travel_db
+    volumes:
+      - travel_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  web:
+    build: .
+    container_name: travel_web
+    working_dir: /app
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    develop:
+      watch:
+        - action: sync
+          path: ./
+          target: /app
+          ignore:
+            - __pycache__/
+            - "*.pyc"
+            - .git/
+            - .vscode/
+            - staticfiles/
+            - media/
+        - action: rebuild
+          path: requirements.txt
+    environment:
+      DJANGO_SETTINGS_MODULE: travel_tourism.settings
+      DEBUG: "True"
+      ALLOWED_HOSTS: "localhost,127.0.0.1,0.0.0.0,[::1]"
+      DB_HOST: db
+      POSTGRES_USER: travel_user
+      POSTGRES_PASSWORD: "123456"
+      POSTGRES_DB: travel_db
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+volumes:
+  travel_data:
