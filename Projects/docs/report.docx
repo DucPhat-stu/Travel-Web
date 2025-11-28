@@ -1,0 +1,137 @@
+TRƯỜNG: Đại Học Giao Thông Vận Tải (UTH)
+KHOA Công nghệ thông tin
+MÔN HỌC Đồ án thực tế Công Nghệ Phần Mềm
+
+BÁO CÁO ĐỒ ÁN CUỐI KỲ
+Tên đề tài: Hệ thống Đặt Tour Du Lịch, Khách Sạn và Vé Máy Bay
+
+Nhóm:          Kỳ học:
+
+THÀNH VIÊN NHÓM
+- Nguyễn Đức Phát – Vai trò – Phần phụ trách
+- Nguyễn Trọng Phúc – Vai trò – Phần phụ trách
+- Mai Thuý Ngọc – Vai trò – Phần phụ trách
+- Nguyễn Văn Hải Dương – Vai trò – Phần phụ trách
+
+----------------------------------------
+
+MỤC LỤC
+1. Giới thiệu hệ thống
+2. Phân tích yêu cầu
+3. Thiết kế hệ thống
+4. Thiết kế cơ sở dữ liệu
+5. Thiết kế giao diện
+6. Mô tả chức năng chính
+7. Kết quả thực hiện
+8. Kết luận và hướng phát triển
+
+----------------------------------------
+
+1. Giới thiệu hệ thống
+- Mục tiêu xây dựng hệ thống du lịch cho người dùng đặt tour, khách sạn, và vé máy bay.
+- Admin có trang điều khiển để quản lý dữ liệu và đơn đặt.
+
+2. Phân tích yêu cầu
+# Requirements Document
+
+## 1. Mục tiêu hệ thống
+Hệ thống hỗ trợ người dùng tìm kiếm và đặt dịch vụ du lịch gồm: tour, khách sạn và vé máy bay. 
+Quản trị viên có giao diện riêng để quản lý dữ liệu và theo dõi hoạt động.
+
+## 2. Vai trò hệ thống
+
+### 2.1 User
+Người dùng cuối, sử dụng để tra cứu và đặt dịch vụ.
+
+### 2.2 Admin
+Quản trị viên, có quyền quản lý dữ liệu, tài khoản và đơn đặt.
+
+---
+
+## 3. Chức năng User (CỤ THỂ)
+
+| Mã chức năng | Tên chức năng | Mô tả |
+|---|---|---|
+| U01 | Đăng ký tài khoản | Tạo tài khoản mới gồm các thông tin: họ tên, email, số điện thoại, mật khẩu, địa chỉ. |
+| U02 | Đăng nhập | Đăng nhập bằng email và mật khẩu. |
+| U03 | Đăng xuất | Thoát phiên đăng nhập hiện tại. |
+| U04 | Quên mật khẩu | Khôi phục mật khẩu bằng số điện thoại hoặc email. |
+| U05 | Xem danh sách tour | Xem danh sách tour kèm giá, thời gian, địa điểm, hình ảnh. |
+| U06 | Xem chi tiết tour | Xem mô tả tour, lịch trình, điều kiện đi kèm, giá chi tiết. |
+| U07 | Đặt tour | Tạo đơn đặt tour, chọn số lượng người đi, thời gian đi. |
+| U08 | Xem danh sách khách sạn | Xem danh sách khách sạn theo địa điểm và mức giá. |
+| U09 | Xem chi tiết khách sạn | Xem mô tả khách sạn, đánh giá, phòng còn trống. |
+| U10 | Đặt khách sạn | Tạo đơn đặt phòng khách sạn. |
+| U11 | Xem danh sách chuyến bay | Xem các lựa chọn chuyến bay theo thời gian và địa điểm. |
+| U12 | Xem chi tiết chuyến bay | Xem thông tin chuyến, hãng bay, hạng ghế, giá. |
+| U13 | Đặt vé máy bay | Tạo đơn đặt chuyến bay. |
+| U14 | Xem lịch sử đặt dịch vụ | Xem tất cả đơn đặt: tour / khách sạn / flight, trạng thái và ngày đặt. |
+| U15 | Hủy đặt dịch vụ | Hủy đơn nếu chưa được admin xác nhận. |
+| U16 | Chatbot hỗ trợ | Gửi câu hỏi và nhận phản hồi từ chatbot. |
+
+---
+
+## 4. Chức năng Admin (CỤ THỂ)
+
+| Mã | Tên chức năng | Mô tả |
+|---|---|---|
+| A01 | Đăng nhập admin | Đăng nhập sử dụng tài khoản admin. |
+| A02 | Dashboard tổng quan | Hiển thị số lượng booking, số lượng user mới, lượt truy cập. |
+| A03 | Quản lý User | Xem danh sách user, khóa tài khoản, cập nhật thông tin cơ bản. |
+| A04 | Quản lý Tour | Thêm tour, sửa thông tin tour, xóa tour. |
+| A05 | Quản lý Khách sạn | Thêm khách sạn, sửa thông tin khách sạn, xóa khách sạn. |
+| A06 | Quản lý Chuyến bay | Thêm chuyến bay, sửa thông tin chuyến bay, xóa chuyến bay. |
+| A07 | Quản lý đơn đặt | Xem danh sách đơn đặt, xác nhận hoặc từ chối đơn. |
+| A08 | Quản lý chatbot log | Xem lịch sử hội thoại người dùng → chatbot. |
+| A09 | Xuất báo cáo hệ thống | Xuất csv hoặc excel thống kê số liệu. |
+
+---
+
+## 5. Điều kiện phi chức năng
+
+| Yêu cầu | Mô tả |
+|---|---|
+| Giao diện | Dễ nhìn, dễ thao tác, ưu tiên đơn giản. |
+| Bảo mật | Phân quyền rõ giữa user và admin. Không cho admin và user share giao diện. |
+| Dữ liệu | Sử dụng PostgreSQL. Dữ liệu booking không được mất khi khởi động lại hệ thống. |
+| Mở rộng | Cấu trúc dự án có thể thêm tính năng mà không phải viết lại backend chính. |
+
+---
+
+## 6. Phạm vi ban đầu
+- Chưa yêu cầu thanh toán online.
+- Chatbot chỉ hỗ trợ trả lời câu hỏi cơ bản theo dữ liệu có sẵn.
+- Không triển khai thuật toán gợi ý tuyến tính theo hành vi user trong giai đoạn đầu.
+
+3. Thiết kế hệ thống
+- Kiến trúc MVC / MVT theo Django.
+- Sử dụng PostgreSQL.
+- Tách giao diện User và Admin.
+(Chèn ảnh system_architecture.png)
+
+4. Thiết kế cơ sở dữ liệu
+(Chèn ERD + models_design.md)
+Giải thích các bảng và quan hệ.
+
+5. Thiết kế giao diện
+(Chèn hình từ ui_wireframes/)
+
+6. Mô tả chức năng chính
+Liệt kê theo U01 → U16 và A01 → A09.
+
+7. Kết quả thực hiện
+- Các chức năng hoàn thiện
+- Demo giao diện
+- Màn hình kiểm thử
+
+8. Kết luận và hướng phát triển
+- Tích hợp thanh toán online
+- Gợi ý tour theo hành vi người dùng
+- Chatbot nâng cấp AI NLP nâng cao
+
+----------------------------------------
+
+TÀI LIỆU THAM KHẢO
+- Trang chủ Django docs
+- PostgreSQL docs
+- Bootstrap docs

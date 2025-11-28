@@ -1,0 +1,372 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Giới thiệu - Travel Tourism{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Hero Section */
+    .about-hero {
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
+        padding: 6rem 0 4rem;
+        color: white;
+        text-align: center;
+    }
+
+    .about-hero h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .about-hero p {
+        font-size: 1.3rem;
+        opacity: 0.95;
+    }
+
+    /* Mission Section */
+    .mission-section {
+        padding: 5rem 0;
+        background: white;
+    }
+
+    .mission-card {
+        text-align: center;
+        padding: 2.5rem;
+        border-radius: 20px;
+        height: 100%;
+        transition: all 0.3s;
+        border: 1px solid #e9ecef;
+    }
+
+    .mission-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        border-color: var(--primary-color);
+    }
+
+    .mission-icon {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 2rem;
+        background: var(--travel-gradient);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 2.5rem;
+    }
+
+    /* Story Section */
+    .story-section {
+        padding: 5rem 0;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+
+    .story-content {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: #495057;
+    }
+
+    .story-image {
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+    }
+
+    /* Values Section */
+    .values-section {
+        padding: 5rem 0;
+        background: white;
+    }
+
+    .value-item {
+        text-align: center;
+        padding: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .value-number {
+        font-size: 4rem;
+        font-weight: 800;
+        background: var(--travel-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 1rem;
+    }
+
+    /* Team Section */
+    .team-section {
+        padding: 5rem 0;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+
+    .team-card {
+        text-align: center;
+        background: white;
+        border-radius: 20px;
+        padding: 2rem;
+        transition: all 0.3s;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .team-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .team-avatar {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin: 0 auto 1.5rem;
+        border: 5px solid var(--primary-color);
+    }
+
+    /* CTA Section */
+    .cta-section {
+        padding: 5rem 0;
+        background: var(--travel-gradient);
+        color: white;
+        text-align: center;
+    }
+
+    @media (max-width: 768px) {
+        .about-hero h1 {
+            font-size: 2.5rem;
+        }
+        
+        .about-hero p {
+            font-size: 1.1rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="about-hero" data-aos="fade-down">
+    <div class="container">
+        <h1>Về Chúng Tôi</h1>
+        <p>Đồng hành cùng bạn trên mọi hành trình khám phá thế giới</p>
+    </div>
+</section>
+
+<!-- Mission Section -->
+<section class="mission-section">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="display-4 fw-bold mb-3">Sứ Mệnh Của Chúng Tôi</h2>
+            <p class="lead text-muted">Mang đến những trải nghiệm du lịch tuyệt vời nhất</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="mission-card card-hover">
+                    <div class="mission-icon">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                    <h4 class="fw-bold mb-3">Khám Phá Thế Giới</h4>
+                    <p class="text-muted">
+                        Chúng tôi giúp bạn khám phá những điểm đến tuyệt vời trên khắp thế giới, 
+                        từ những thành phố sầm uất đến những thiên đường nhiệt đới.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="mission-card card-hover">
+                    <div class="mission-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h4 class="fw-bold mb-3">Dịch Vụ Tận Tâm</h4>
+                    <p class="text-muted">
+                        Đội ngũ chuyên nghiệp của chúng tôi luôn sẵn sàng hỗ trợ bạn 24/7, 
+                        đảm bảo mọi hành trình của bạn đều trở nên đáng nhớ.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="mission-card card-hover">
+                    <div class="mission-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4 class="fw-bold mb-3">Chất Lượng Cao</h4>
+                    <p class="text-muted">
+                        Chúng tôi cam kết mang đến dịch vụ chất lượng cao với giá cả hợp lý, 
+                        đối tác uy tín và trải nghiệm tuyệt vời nhất.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Story Section -->
+<section class="story-section">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6" data-aos="fade-right">
+                <img src="{% static 'images/placeholder.svg' %}" alt="Our Story" class="story-image">
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <h2 class="display-5 fw-bold mb-4">Câu Chuyện Của Chúng Tôi</h2>
+                <div class="story-content">
+                    <p class="mb-4">
+                        <strong>Travel Tourism</strong> được thành lập với sứ mệnh mang đến những trải nghiệm 
+                        du lịch đáng nhớ cho mọi người. Với hơn <strong>15 năm kinh nghiệm</strong> trong ngành du lịch, 
+                        chúng tôi đã phục vụ hơn <strong>50,000 khách hàng</strong> và tổ chức hàng nghìn chuyến đi 
+                        thành công trên khắp thế giới.
+                    </p>
+                    <p class="mb-4">
+                        Chúng tôi tự hào là đối tác của các hãng hàng không, khách sạn và dịch vụ du lịch 
+                        hàng đầu, giúp bạn tiếp cận với những ưu đãi tốt nhất và dịch vụ chất lượng cao.
+                    </p>
+                    <p>
+                        Đội ngũ của chúng tôi bao gồm những chuyên gia du lịch giàu kinh nghiệm, 
+                        luôn tận tâm và sẵn sàng hỗ trợ bạn trong mọi bước của hành trình.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Values Section -->
+<section class="values-section">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="display-4 fw-bold mb-3">Giá Trị Cốt Lõi</h2>
+            <p class="lead text-muted">Những điều chúng tôi cam kết</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="100">
+                <div class="value-item">
+                    <div class="value-number">01</div>
+                    <h5 class="fw-bold">Uy Tín</h5>
+                    <p class="text-muted small">Đối tác tin cậy, dịch vụ đảm bảo</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="200">
+                <div class="value-item">
+                    <div class="value-number">02</div>
+                    <h5 class="fw-bold">Chất Lượng</h5>
+                    <p class="text-muted small">Dịch vụ cao cấp, trải nghiệm tuyệt vời</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="300">
+                <div class="value-item">
+                    <div class="value-number">03</div>
+                    <h5 class="fw-bold">Giá Tốt</h5>
+                    <p class="text-muted small">Giá cả hợp lý, nhiều ưu đãi</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="400">
+                <div class="value-item">
+                    <div class="value-number">04</div>
+                    <h5 class="fw-bold">Hỗ Trợ</h5>
+                    <p class="text-muted small">Tư vấn 24/7, hỗ trợ tận tâm</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Team Section -->
+<section class="team-section">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="display-4 fw-bold mb-3">Đội Ngũ Của Chúng Tôi</h2>
+            <p class="lead text-muted">Những người tạo nên sự khác biệt</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="team-card">
+                    <img src="{% static 'images/placeholder.svg' %}" alt="Team Member" class="team-avatar">
+                    <h5 class="fw-bold mb-2">Nguyễn Văn A</h5>
+                    <p class="text-primary mb-2">CEO & Founder</p>
+                    <p class="text-muted small">
+                        Với hơn 20 năm kinh nghiệm trong ngành du lịch, 
+                        anh là người dẫn dắt và định hướng cho công ty.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="team-card">
+                    <img src="{% static 'images/placeholder.svg' %}" alt="Team Member" class="team-avatar">
+                    <h5 class="fw-bold mb-2">Trần Thị B</h5>
+                    <p class="text-primary mb-2">Giám Đốc Điều Hành</p>
+                    <p class="text-muted small">
+                        Chuyên gia về quản lý dịch vụ khách hàng và 
+                        đảm bảo chất lượng dịch vụ cao nhất.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="team-card">
+                    <img src="{% static 'images/placeholder.svg' %}" alt="Team Member" class="team-avatar">
+                    <h5 class="fw-bold mb-2">Lê Văn C</h5>
+                    <p class="text-primary mb-2">Trưởng Phòng Marketing</p>
+                    <p class="text-muted small">
+                        Chuyên gia về marketing du lịch và phát triển 
+                        các chương trình khuyến mãi hấp dẫn.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="100">
+                <div class="stat-item">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Năm Kinh Nghiệm</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="200">
+                <div class="stat-item">
+                    <div class="stat-number">50K+</div>
+                    <div class="stat-label">Khách Hàng</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="300">
+                <div class="stat-item">
+                    <div class="stat-number">10K+</div>
+                    <div class="stat-label">Điểm Đến</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="400">
+                <div class="stat-item">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Hài Lòng</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container" data-aos="zoom-in">
+        <h2 class="cta-title">Sẵn Sàng Bắt Đầu Hành Trình?</h2>
+        <p class="cta-subtitle">Liên hệ với chúng tôi ngay hôm nay để được tư vấn miễn phí</p>
+        <div class="d-flex gap-3 justify-content-center flex-wrap">
+            <a href="{% url 'core:contact' %}" class="btn btn-light btn-lg btn-animated">
+                <i class="fas fa-envelope me-2"></i>Liên hệ ngay
+            </a>
+            <a href="{% url 'core:home' %}" class="btn btn-outline-light btn-lg">
+                <i class="fas fa-home me-2"></i>Về trang chủ
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}

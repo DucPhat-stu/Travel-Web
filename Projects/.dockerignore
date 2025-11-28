@@ -1,0 +1,28 @@
+type nul > .dockerignore
+```
+
+Paste vào `.dockerignore`:
+```
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+venv/
+env/
+.env
+.venv
+.git
+.gitignore
+.vscode/
+.idea/
+*.log
+db.sqlite3
+staticfiles/
+media/
+venv/

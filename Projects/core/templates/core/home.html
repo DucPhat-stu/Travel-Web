@@ -1,0 +1,807 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block title %}Trang chủ - Travel Tourism{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Hero Section */
+    .hero-section {
+        position: relative;
+        min-height: 90vh;
+        display: flex;
+        align-items: center;
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%),
+                    url('{% static "images/banner.svg" %}') center/cover;
+        background-attachment: fixed;
+        overflow: hidden;
+    }
+
+    .hero-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.3);
+        z-index: 1;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        color: white;
+    }
+
+    .hero-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        animation: fadeInUp 1s ease-out;
+    }
+
+    .hero-subtitle {
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+        opacity: 0.95;
+        animation: fadeInUp 1s ease-out 0.2s both;
+    }
+
+    /* Search Form */
+    .search-form-container {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        padding: 2.5rem;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        animation: fadeInUp 1s ease-out 0.4s both;
+    }
+
+    .search-tabs {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        border-bottom: 2px solid #e9ecef;
+    }
+
+    .search-tab {
+        flex: 1;
+        padding: 1rem;
+        text-align: center;
+        cursor: pointer;
+        border: none;
+        background: none;
+        font-weight: 600;
+        color: #6c757d;
+        transition: all 0.3s;
+        position: relative;
+    }
+
+    .search-tab.active {
+        color: var(--primary-color);
+    }
+
+    .search-tab.active::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--primary-color);
+        border-radius: 3px 3px 0 0;
+    }
+
+    .form-group-icon {
+        position: relative;
+    }
+
+    .form-group-icon i {
+        position: absolute;
+        left: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6c757d;
+        z-index: 3;
+    }
+
+    .form-group-icon input,
+    .form-group-icon select {
+        padding-left: 45px;
+    }
+
+    /* Features Section */
+    .features-section {
+        padding: 5rem 0;
+        background: white;
+    }
+
+    .feature-card {
+        text-align: center;
+        padding: 2rem;
+        border-radius: 15px;
+        transition: all 0.3s;
+        height: 100%;
+        border: 1px solid #e9ecef;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        border-color: var(--primary-color);
+    }
+
+    .feature-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 1.5rem;
+        background: var(--travel-gradient);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 2rem;
+    }
+
+    /* Popular Destinations */
+    .destinations-section {
+        padding: 5rem 0;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+
+    .destination-card {
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        height: 400px;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .destination-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    }
+
+    .destination-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+    }
+
+    .destination-card:hover .destination-image {
+        transform: scale(1.1);
+    }
+
+    .destination-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+        padding: 2rem;
+        color: white;
+    }
+
+    .destination-price {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #ffc107;
+    }
+
+    /* Stats Section */
+    .stats-section {
+        padding: 4rem 0;
+        background: var(--travel-gradient);
+        color: white;
+    }
+
+    .stat-item {
+        text-align: center;
+    }
+
+    .stat-number {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+        font-size: 1.1rem;
+        opacity: 0.9;
+    }
+
+    /* Testimonials */
+    .testimonials-section {
+        padding: 5rem 0;
+        background: white;
+    }
+
+    .testimonial-card {
+        background: white;
+        border-radius: 20px;
+        padding: 2.5rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        height: 100%;
+        transition: all 0.3s;
+    }
+
+    .testimonial-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .testimonial-avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 1.5rem;
+        border: 4px solid var(--primary-color);
+    }
+
+    .testimonial-rating {
+        color: #ffc107;
+        margin-bottom: 1rem;
+    }
+
+    /* CTA Section */
+    .cta-section {
+        padding: 5rem 0;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        text-align: center;
+    }
+
+    .cta-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    .cta-subtitle {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .hero-title {
+            font-size: 2.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+        }
+
+        .search-form-container {
+            padding: 1.5rem;
+        }
+
+        .search-tabs {
+            flex-direction: column;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section with Search -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 hero-content" data-aos="fade-right">
+                <h1 class="hero-title">Khám Phá Thế Giới Cùng Chúng Tôi</h1>
+                <p class="hero-subtitle">
+                    Hơn 10,000+ điểm đến tuyệt vời đang chờ đón bạn. 
+                    Đặt tour, khách sạn và vé máy bay với giá tốt nhất.
+                </p>
+                <div class="d-flex gap-3 flex-wrap">
+                    <a href="#destinations" class="btn btn-light btn-lg btn-animated">
+                        <i class="fas fa-map-marked-alt me-2"></i>Khám phá ngay
+                    </a>
+                    <a href="{% url 'core:about' %}" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-info-circle me-2"></i>Tìm hiểu thêm
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <div class="search-form-container">
+                    <div class="search-tabs">
+                        <button class="search-tab active" data-tab="tour">
+                            <i class="fas fa-map-marked-alt me-2"></i>Tour
+                        </button>
+                        <button class="search-tab" data-tab="hotel">
+                            <i class="fas fa-hotel me-2"></i>Khách sạn
+                        </button>
+                        <button class="search-tab" data-tab="flight">
+                            <i class="fas fa-plane me-2"></i>Chuyến bay
+                        </button>
+                    </div>
+
+                    <!-- Tour Search Form -->
+                    <form id="tourSearchForm" class="search-form active">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-group-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <input type="text" class="form-control form-control-lg" 
+                                           placeholder="Điểm đến" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group-icon">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <input type="date" class="form-control form-control-lg" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group-icon">
+                                    <i class="fas fa-users"></i>
+                                    <select class="form-select form-select-lg">
+                                        <option>1 người</option>
+                                        <option>2 người</option>
+                                        <option>3 người</option>
+                                        <option>4+ người</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group-icon">
+                                    <i class="fas fa-clock"></i>
+                                    <select class="form-select form-select-lg">
+                                        <option>1-3 ngày</option>
+                                        <option>4-7 ngày</option>
+                                        <option>8-14 ngày</option>
+                                        <option>15+ ngày</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary btn-lg w-100 btn-animated">
+                                    <i class="fas fa-search me-2"></i>Tìm kiếm tour
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Hotel Search Form -->
+                    <form id="hotelSearchForm" class="search-form" style="display: none;">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-group-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <input type="text" class="form-control form-control-lg" 
+                                           placeholder="Thành phố/Khu vực" required>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group-icon">
+                                    <i class="fas fa-calendar-check"></i>
+                                    <input type="date" class="form-control form-control-lg" 
+                                           placeholder="Nhận phòng" required>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group-icon">
+                                    <i class="fas fa-calendar-times"></i>
+                                    <input type="date" class="form-control form-control-lg" 
+                                           placeholder="Trả phòng" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group-icon">
+                                    <i class="fas fa-users"></i>
+                                    <select class="form-select form-select-lg">
+                                        <option>1 phòng, 2 khách</option>
+                                        <option>1 phòng, 1 khách</option>
+                                        <option>2 phòng, 4 khách</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-primary btn-lg w-100 btn-animated">
+                                    <i class="fas fa-search me-2"></i>Tìm khách sạn
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Flight Search Form -->
+                    <form id="flightSearchForm" class="search-form" style="display: none;">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-group-icon">
+                                    <i class="fas fa-plane-departure"></i>
+                                    <input type="text" class="form-control form-control-lg" 
+                                           placeholder="Điểm đi" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group-icon">
+                                    <i class="fas fa-plane-arrival"></i>
+                                    <input type="text" class="form-control form-control-lg" 
+                                           placeholder="Điểm đến" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group-icon">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <input type="date" class="form-control form-control-lg" 
+                                           placeholder="Ngày đi" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group-icon">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <input type="date" class="form-control form-control-lg" 
+                                           placeholder="Ngày về (tùy chọn)">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group-icon">
+                                    <i class="fas fa-users"></i>
+                                    <select class="form-select form-select-lg">
+                                        <option>1 người lớn</option>
+                                        <option>2 người lớn</option>
+                                        <option>3 người lớn</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary btn-lg w-100 btn-animated">
+                                    <i class="fas fa-search me-2"></i>Tìm chuyến bay
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features-section">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="display-4 fw-bold mb-3">Tại Sao Chọn Chúng Tôi?</h2>
+            <p class="lead text-muted">Dịch vụ du lịch hàng đầu với nhiều ưu đãi hấp dẫn</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="feature-card card-hover">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4 class="fw-bold mb-3">Đảm Bảo An Toàn</h4>
+                    <p class="text-muted">
+                        Bảo hiểm du lịch toàn diện, hỗ trợ 24/7 trong suốt hành trình của bạn.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="feature-card card-hover">
+                    <div class="feature-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <h4 class="fw-bold mb-3">Giá Tốt Nhất</h4>
+                    <p class="text-muted">
+                        Cam kết giá tốt nhất thị trường với nhiều chương trình khuyến mãi hấp dẫn.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="feature-card card-hover">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h4 class="fw-bold mb-3">Hỗ Trợ 24/7</h4>
+                    <p class="text-muted">
+                        Đội ngũ tư vấn chuyên nghiệp luôn sẵn sàng hỗ trợ bạn mọi lúc, mọi nơi.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="feature-card card-hover">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                    <h4 class="fw-bold mb-3">Nhiều Điểm Đến</h4>
+                    <p class="text-muted">
+                        Hơn 10,000+ điểm đến trên toàn thế giới đang chờ bạn khám phá.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
+                <div class="feature-card card-hover">
+                    <div class="feature-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h4 class="fw-bold mb-3">Chất Lượng Cao</h4>
+                    <p class="text-muted">
+                        Đối tác uy tín, dịch vụ chất lượng được hàng nghìn khách hàng tin tưởng.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="600">
+                <div class="feature-card card-hover">
+                    <div class="feature-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <h4 class="fw-bold mb-3">Thanh Toán Dễ Dàng</h4>
+                    <p class="text-muted">
+                        Nhiều phương thức thanh toán an toàn, tiện lợi và nhanh chóng.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="100">
+                <div class="stat-item">
+                    <div class="stat-number">10K+</div>
+                    <div class="stat-label">Điểm Đến</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="200">
+                <div class="stat-item">
+                    <div class="stat-number">50K+</div>
+                    <div class="stat-label">Khách Hàng</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="300">
+                <div class="stat-item">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Năm Kinh Nghiệm</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="400">
+                <div class="stat-item">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Hài Lòng</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Popular Destinations -->
+<section class="destinations-section" id="destinations">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="display-4 fw-bold mb-3">Điểm Đến Phổ Biến</h2>
+            <p class="lead text-muted">Khám phá những địa điểm du lịch được yêu thích nhất</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="destination-card card-hover">
+                    <img src="{% static 'images/placeholder.svg' %}" alt="Đà Lạt" class="destination-image">
+                    <div class="destination-overlay">
+                        <h4 class="fw-bold mb-2">Đà Lạt</h4>
+                        <p class="mb-2"><i class="fas fa-map-marker-alt me-2"></i>Việt Nam</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="destination-price">2.500.000₫</span>
+                            <span class="text-white-50">/người</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="destination-card card-hover">
+                    <img src="{% static 'images/placeholder.svg' %}" alt="Phú Quốc" class="destination-image">
+                    <div class="destination-overlay">
+                        <h4 class="fw-bold mb-2">Phú Quốc</h4>
+                        <p class="mb-2"><i class="fas fa-map-marker-alt me-2"></i>Việt Nam</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="destination-price">3.200.000₫</span>
+                            <span class="text-white-50">/người</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="destination-card card-hover">
+                    <img src="{% static 'images/placeholder.svg' %}" alt="Hạ Long" class="destination-image">
+                    <div class="destination-overlay">
+                        <h4 class="fw-bold mb-2">Hạ Long</h4>
+                        <p class="mb-2"><i class="fas fa-map-marker-alt me-2"></i>Việt Nam</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="destination-price">2.800.000₫</span>
+                            <span class="text-white-50">/người</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="destination-card card-hover">
+                    <img src="{% static 'images/placeholder.svg' %}" alt="Bangkok" class="destination-image">
+                    <div class="destination-overlay">
+                        <h4 class="fw-bold mb-2">Bangkok</h4>
+                        <p class="mb-2"><i class="fas fa-map-marker-alt me-2"></i>Thái Lan</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="destination-price">5.500.000₫</span>
+                            <span class="text-white-50">/người</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="500">
+                <div class="destination-card card-hover">
+                    <img src="{% static 'images/placeholder.svg' %}" alt="Singapore" class="destination-image">
+                    <div class="destination-overlay">
+                        <h4 class="fw-bold mb-2">Singapore</h4>
+                        <p class="mb-2"><i class="fas fa-map-marker-alt me-2"></i>Singapore</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="destination-price">8.900.000₫</span>
+                            <span class="text-white-50">/người</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="600">
+                <div class="destination-card card-hover">
+                    <img src="{% static 'images/placeholder.svg' %}" alt="Bali" class="destination-image">
+                    <div class="destination-overlay">
+                        <h4 class="fw-bold mb-2">Bali</h4>
+                        <p class="mb-2"><i class="fas fa-map-marker-alt me-2"></i>Indonesia</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="destination-price">7.200.000₫</span>
+                            <span class="text-white-50">/người</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-5" data-aos="fade-up">
+            <a href="#" class="btn btn-primary btn-lg btn-animated">
+                <i class="fas fa-eye me-2"></i>Xem tất cả điểm đến
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials-section">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="display-4 fw-bold mb-3">Khách Hàng Nói Gì Về Chúng Tôi</h2>
+            <p class="lead text-muted">Những phản hồi chân thật từ khách hàng</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="testimonial-card">
+                    <img src="{% static 'images/placeholder.svg' %}" alt="Customer" class="testimonial-avatar">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="mb-3">"Dịch vụ tuyệt vời! Chuyến đi Đà Lạt của tôi thật sự đáng nhớ. Hướng dẫn viên nhiệt tình, khách sạn đẹp và giá cả hợp lý."</p>
+                    <h6 class="fw-bold mb-1">Nguyễn Văn A</h6>
+                    <small class="text-muted">Khách hàng thân thiết</small>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="testimonial-card">
+                    <img src="{% static 'images/placeholder.svg' %}" alt="Customer" class="testimonial-avatar">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="mb-3">"Đã đặt tour Phú Quốc qua website này. Quy trình đơn giản, thanh toán dễ dàng. Sẽ quay lại đặt tiếp!"</p>
+                    <h6 class="fw-bold mb-1">Trần Thị B</h6>
+                    <small class="text-muted">Khách hàng mới</small>
+                </div>
+            </div>
+            <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="testimonial-card">
+                    <img src="{% static 'images/placeholder.svg' %}" alt="Customer" class="testimonial-avatar">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <p class="mb-3">"Tour Singapore 4 ngày 3 đêm rất tuyệt! Lịch trình hợp lý, ăn uống ngon, khách sạn trung tâm. Cảm ơn team rất nhiều!"</p>
+                    <h6 class="fw-bold mb-1">Lê Văn C</h6>
+                    <small class="text-muted">Khách hàng VIP</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+    <div class="container" data-aos="zoom-in">
+        <h2 class="cta-title">Sẵn Sàng Bắt Đầu Hành Trình Của Bạn?</h2>
+        <p class="cta-subtitle">Đăng ký ngay để nhận ưu đãi đặc biệt và cập nhật tour mới nhất</p>
+        <div class="d-flex gap-3 justify-content-center flex-wrap">
+            <a href="{% url 'users:register' %}" class="btn btn-light btn-lg btn-animated">
+                <i class="fas fa-user-plus me-2"></i>Đăng ký miễn phí
+            </a>
+            <a href="{% url 'core:contact' %}" class="btn btn-outline-light btn-lg">
+                <i class="fas fa-phone me-2"></i>Liên hệ tư vấn
+            </a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Search Tab Switching
+    document.querySelectorAll('.search-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+            const tabType = this.dataset.tab;
+            
+            // Update active tab
+            document.querySelectorAll('.search-tab').forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Show/hide forms
+            document.querySelectorAll('.search-form').forEach(form => {
+                form.style.display = 'none';
+            });
+            
+            const activeForm = document.getElementById(tabType + 'SearchForm');
+            if (activeForm) {
+                activeForm.style.display = 'block';
+            }
+        });
+    });
+
+    // Form submission handlers
+    document.getElementById('tourSearchForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        // TODO: Implement tour search
+        alert('Tính năng tìm kiếm tour đang được phát triển!');
+    });
+
+    document.getElementById('hotelSearchForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        // TODO: Implement hotel search
+        alert('Tính năng tìm kiếm khách sạn đang được phát triển!');
+    });
+
+    document.getElementById('flightSearchForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        // TODO: Implement flight search
+        alert('Tính năng tìm kiếm chuyến bay đang được phát triển!');
+    });
+</script>
+{% endblock %}
+

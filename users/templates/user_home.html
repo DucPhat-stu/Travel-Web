@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Home</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Welcome, {{ user.username }}!</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'profile' %}">Profile</a></li>
+                <li><a href="{% url 'bookings' %}">My Bookings</a></li>
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Your Recent Activities</h2>
+            {% if recent_activities %}
+                <ul>
+                    {% for activity in recent_activities %}
+                        <li>{{ activity.description }} on {{ activity.date }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No recent activities found.</p>
+            {% endif %}
+        </section>
+        <section>
+            <h2>Recommended Tours</h2>
+            {% if recommended_tours %}
+                <ul>
+                    {% for tour in recommended_tours %}
+                        <li><a href="{% url 'tour_detail' tour.id %}">{{ tour.name }}</a> - {{ tour.location }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No recommendations available at the moment.</p>
+            {% endif %}
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Travel & Tourism. All rights reserved.</p>
+    </footer>
+</body>
+</html>
