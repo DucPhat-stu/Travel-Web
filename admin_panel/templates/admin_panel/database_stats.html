@@ -1,0 +1,259 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Database Statistics</title>
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <style>
+        .stats-card { transition: transform 0.2s; }
+        .stats-card:hover { transform: translateY(-2px); }
+        .metric-value { font-size: 2rem; font-weight: bold; color: #007bff; }
+        .metric-label { font-size: 0.875rem; color: #6c757d; text-transform: uppercase; }
+    </style>
+</head>
+<body class="bg-light">
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">Database Statistics</h2>
+        <a href="/admin-panel/" class="btn btn-outline-secondary">← Back to Dashboard</a>
+    </div>
+
+    <!-- User Statistics -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0">👥 User Statistics</h5>
+        </div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <div class="card stats-card border-primary">
+                        <div class="card-body text-center">
+                            <div class="metric-value">{{ total_users }}</div>
+                            <div class="metric-label">Total Users</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card stats-card border-success">
+                        <div class="card-body text-center">
+                            <div class="metric-value">{{ active_users }}</div>
+                            <div class="metric-label">Active Users</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card stats-card border-warning">
+                        <div class="card-body text-center">
+                            <div class="metric-value">{{ admin_users }}</div>
+                            <div class="metric-label">Admin Users</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card stats-card border-info">
+                        <div class="card-body text-center">
+                            <div class="metric-value">{{ recent_user_registrations }}</div>
+                            <div class="metric-label">New Users (30 days)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Statistics -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0">📅 Booking Statistics</h5>
+        </div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <div class="card stats-card border-primary">
+                        <div class="card-body text-center">
+                            <div class="metric-value">{{ total_bookings }}</div>
+                            <div class="metric-label">Total Bookings</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card stats-card border-success">
+                        <div class="card-body text-center">
+                            <div class="metric-value">{{ tour_bookings }}</div>
+                            <div class="metric-label">Tour Bookings</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card stats-card border-warning">
+                        <div class="card-body text-center">
+                            <div class="metric-value">{{ hotel_bookings }}</div>
+                            <div class="metric-label">Hotel Bookings</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card stats-card border-info">
+                        <div class="card-body text-center">
+                            <div class="metric-value">{{ flight_bookings }}</div>
+                            <div class="metric-label">Flight Bookings</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tour Statistics -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0">✈️ Tour Statistics</h5>
+        </div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="card stats-card border-primary">
+                        <div class="card-body text-center">
+                            <div class="metric-value">{{ total_tours }}</div>
+                            <div class="metric-label">Total Tours</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card stats-card border-success">
+                        <div class="card-body text-center">
+                            <div class="metric-value">{{ active_tours }}</div>
+                            <div class="metric-label">Active Tours</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card stats-card border-info">
+                        <div class="card-body text-center">
+                            <div class="metric-value">${{ tour_price_avg|floatformat:0 }}</div>
+                            <div class="metric-label">Average Price</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Infrastructure Statistics -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0">🏨 Infrastructure Statistics</h5>
+        </div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <div class="card stats-card border-primary">
+                        <div class="card-body text-center">
+                            <div class="metric-value">{{ total_hotels }}</div>
+                            <div class="metric-label">Total Hotels</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card stats-card border-success">
+                        <div class="card-body text-center">
+                            <div class="metric-value">{{ active_hotels }}</div>
+                            <div class="metric-label">Active Hotels</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card stats-card border-warning">
+                        <div class="card-body text-center">
+                            <div class="metric-value">{{ total_flights }}</div>
+                            <div class="metric-label">Total Flights</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card stats-card border-info">
+                        <div class="card-body text-center">
+                            <div class="metric-value">{{ active_flights }}</div>
+                            <div class="metric-label">Active Flights</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Catalog Statistics -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0">📍 Catalog Statistics</h5>
+        </div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="card stats-card border-primary">
+                        <div class="card-body text-center">
+                            <div class="metric-value">{{ total_destinations }}</div>
+                            <div class="metric-label">Destinations</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card stats-card border-success">
+                        <div class="card-body text-center">
+                            <div class="metric-value">{{ total_packages }}</div>
+                            <div class="metric-label">Packages</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activity -->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0">🆕 Recent Users</h6>
+                </div>
+                <div class="card-body">
+                    {% for user in recent_users %}
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div>
+                            <strong>{{ user.full_name }}</strong><br>
+                            <small class="text-muted">{{ user.email }}</small>
+                        </div>
+                        <small class="text-muted">{{ user.created_at|date:"M d, H:i" }}</small>
+                    </div>
+                    {% if not forloop.last %}<hr>{% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h6 class="mb-0">📋 Recent Bookings</h6>
+                </div>
+                <div class="card-body">
+                    {% for booking in recent_bookings %}
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <div>
+                            <strong>{{ booking.user.full_name }}</strong><br>
+                            <small class="text-muted">{{ booking.tour.title|truncatechars:30 }}</small>
+                        </div>
+                        <small class="text-muted">{{ booking.created_at|date:"M d, H:i" }}</small>
+                    </div>
+                    {% if not forloop.last %}<hr>{% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

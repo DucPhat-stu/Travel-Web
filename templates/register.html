@@ -1,0 +1,196 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng ký</title>
+    <!-- Favicons -->
+    <link href="{% static 'img/favicon.png' %}" rel="icon" />
+    <link href="{% static 'img/apple-touch-icon.png' %}" rel="apple-touch-icon" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet" />
+    <link href="{% static 'vendor/aos/aos.css' %}" rel="stylesheet" />
+    <link href="{% static 'vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet" />
+
+    <!-- Main CSS File -->
+    <link href="{% static 'css/main.css' %}" rel="stylesheet" />
+    <style>
+      .bg-image {
+        background-image: url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1600&q=80");
+        background-size: cover;
+        background-position: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        z-index: -2;
+      }
+      .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(5px);
+        z-index: -1;
+      }
+      .login-wrapper {
+        height: 100vh;
+      }
+      .login-card {
+        width: 380px;
+        background: white;
+        padding: 35px 30px;
+        border-radius: 18px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        animation: fadeIn 0.5s ease;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .btn-main {
+        background: #0088cc;
+        color: white;
+        padding: 12px;
+        border-radius: 10px;
+        border: none;
+        font-weight: 600;
+      }
+      .btn-main:hover {
+        background: #006fa6;
+      }
+      .text-link {
+        color: #0066cc;
+        text-decoration: none;
+      }
+      .text-link:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg-image"></div>
+    <div class="overlay"></div>
+
+    <div class="login-wrapper d-flex justify-content-center align-items-center">
+      <div class="login-card shadow-lg">
+        <h3 class="text-center mb-4 fw-bold" style="color: #004d66">Đăng ký</h3>
+        {% if messages %}
+          <div id="msg-box">
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }} py-2 mb-2">{{ message }}</div>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        <form method="post" action="{% url 'users:register' %}">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label class="fw-semibold">Họ và tên</label>
+            <input type="text" name="full_name" class="form-control" placeholder="Nhập họ tên" required />
+          </div>
+
+          <div class="mb-3">
+            <label class="fw-semibold">Email</label>
+            <input type="email" name="email" class="form-control" placeholder="Nhập email" required />
+          </div>
+
+          <div class="mb-3">
+            <label class="fw-semibold">Số điện thoại</label>
+            <input type="text" name="phone" class="form-control" placeholder="0xxxxxxxxx" required />
+          </div>
+
+          <div class="mb-3">
+            <label class="fw-semibold">Địa chỉ (không bắt buộc)</label>
+            <input type="text" name="address" class="form-control" placeholder="Nhập địa chỉ" />
+          </div>
+
+          <div class="mb-3">
+            <label class="fw-semibold">Mật khẩu</label>
+            <input
+              type="password"
+              name="password"
+              class="form-control"
+              placeholder="Nhập mật khẩu"
+              required
+            />
+          </div>
+
+          <div class="mb-3">
+            <label class="fw-semibold">Xác nhận mật khẩu</label>
+            <input
+              type="password"
+              name="confirm_password"
+              class="form-control"
+              placeholder="Nhập lại mật khẩu"
+              required
+            />
+          </div>
+
+          <button
+            type="submit"
+            class="btn-main w-100 mt-2"
+          >
+            Đăng ký ngay
+          </button>
+
+          <div class="text-center mt-3">
+            Đã có tài khoản?
+            <a href="{% url 'users:login' %}" class="text-link">Đăng nhập</a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Scroll Top -->
+    <a
+      href="#"
+      id="scroll-top"
+      class="scroll-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- Preloader -->
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
+    <script src="{% static 'vendor/aos/aos.js' %}"></script>
+    <script src="{% static 'vendor/purecounter/purecounter_vanilla.js' %}"></script>
+    <script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'vendor/glightbox/js/glightbox.min.js' %}"></script>
+
+    <!-- Main JS File -->
+    <script src="{% static 'js/main.js' %}"></script>
+    <script>
+      setTimeout(() => {
+        const box = document.getElementById('msg-box');
+        if (box) box.remove();
+      }, 3000);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,464 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Privacy - Tour Bootstrap Template</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicons -->
+    <link href="../assets/img/favicon.png" rel="icon" />
+    <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link
+      href="../assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="../assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link
+      href="../assets/vendor/swiper/swiper-bundle.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../assets/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Main CSS File -->
+    <link href="../assets/css/main.css" rel="stylesheet" />
+  </head>
+
+  <body class="privacy-page">
+    <header id="header" class="header d-flex align-items-center fixed-top">
+      <div
+        class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between"
+      >
+        <a
+          href="{% url 'core:home' %}"
+          class="logo d-flex align-items-center me-auto me-xl-0"
+        >
+          <!-- Uncomment the line below if you also wish to use an image logo -->
+          <!-- <img src="{% static 'img/logo.webp' %}" alt=""> -->
+          <h1 class="sitename">Tour</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="{% url 'core:home' %}">Home</a></li>
+            <li><a href="{% url 'core:about' %}">About</a></li>
+            <li><a href="{% url 'core:destinations' %}">Destinations</a></li>
+            <li><a href="{% url 'tours:tour_list' %}">Tours</a></li>
+            <li><a href="{% url 'core:gallery' %}">Gallery</a></li>
+            <li><a href="{% url 'core:blog' %}">Blog</a></li>
+            <li class="dropdown">
+              <a href="#"
+                ><span>More Pages</span>
+                <i class="bi bi-chevron-down toggle-dropdown"></i
+              ></a>
+              <ul>
+                <li>
+                  <a href="{% url 'core:destinations' %}">Destination Details</a>
+                </li>
+                <li><a href="{% url 'tours:tour_list' %}">Tour Details</a></li>
+                <li><a href="{% url 'bookings:booking_list' %}">Booking</a></li>
+                <li><a href="{% url 'core:testimonials' %}">Testimonials</a></li>
+                <li><a href="{% url 'core:faq' %}">Frequently Asked Questions</a></li>
+                <li><a href="{% url 'core:blog' %}">Blog Details</a></li>
+                <li><a href="{% url 'core:terms' %}">Terms</a></li>
+                <li><a href="{% url 'core:privacy' %}" class="active">Privacy</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#"
+                ><span>Other amenities</span>
+                <i class="bi bi-chevron-down toggle-dropdown"></i
+              ></a>
+              <ul>
+                <li><a href="{% url 'flight:flight_list' %}">Flight</a></li>
+                <li><a href="{% url 'chatbot:chatbot' %}">Chatbot</a></li>
+              </ul>
+            </li>
+            <li><a href="{% url 'core:contact' %}">Contact</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+        {% if user.is_authenticated %}
+          <a class="btn-getstarted" href="{% url 'users:logout' %}">log out</a>
+        {% else %}
+          <a class="btn-getstarted" href="{% url 'users:login' %}">log in</a>
+        {% endif %}
+      </div>
+    </header>
+
+    <main class="main">
+      <!-- Page Title -->
+      <div
+        class="page-title dark-background"
+        data-aos="fade"
+        style="background-image: url(../assets/img/travel/showcase-8.webp)"
+      >
+        <div class="container position-relative">
+          <h1>Privacy</h1>
+          <p>
+            Chúng tôi cam kết bảo vệ thông tin cá nhân của bạn, đảm bảo quyền
+            riêng tư tuyệt đối.
+          </p>
+          <nav class="breadcrumbs">
+            <ol>
+              <li><a href="{% url 'core:home' %}">Home</a></li>
+              <li class="current">Privacy</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+      <!-- End Page Title -->
+
+      <!-- Privacy Section -->
+      <section id="privacy" class="privacy section">
+        <div class="container" data-aos="fade-up">
+          <!-- Header -->
+          <div class="privacy-header" data-aos="fade-up">
+            <div class="header-content">
+              <div class="last-updated">Effective Date: February 27, 2025</div>
+              <h1>Chính sách bảo mật</h1>
+              <p class="intro-text">
+                Chính sách bảo mật này mô tả cách chúng tôi thu thập, sử dụng,
+                xử lý và tiết lộ thông tin của bạn, bao gồm thông tin cá nhân,
+                liên quan đến việc bạn truy cập và sử dụng các dịch vụ của chúng
+                tôi.
+              </p>
+            </div>
+          </div>
+
+          <!-- Main Content -->
+          <div class="privacy-content" data-aos="fade-up">
+            <!-- Introduction -->
+            <div class="content-section">
+              <h2>1. Introduction</h2>
+              <p>
+                Khi bạn sử dụng dịch vụ của chúng tôi, bạn đang tin tưởng chúng
+                tôi với thông tin của bạn. Chúng tôi hiểu đây là một trách nhiệm
+                lớn và nỗ lực hết mình để bảo vệ thông tin của bạn và trao quyền
+                kiểm soát cho bạn.
+              </p>
+              <p>
+                Chính sách bảo mật này nhằm giúp bạn hiểu thông tin chúng tôi
+                thu thập, lý do chúng tôi thu thập thông tin đó và cách bạn có
+                thể cập nhật, quản lý, xuất và xóa thông tin của mình.
+              </p>
+            </div>
+
+            <!-- Information Collection -->
+            <div class="content-section">
+              <h2>2. Information We Collect</h2>
+              <p>
+                Chúng tôi thu thập thông tin để cung cấp dịch vụ tốt hơn cho
+                người dùng. Các loại thông tin chúng tôi thu thập bao gồm:
+              </p>
+
+              <h3>2.1 Information You Provide</h3>
+              <p>
+                Khi bạn tạo tài khoản hoặc sử dụng dịch vụ của chúng tôi, bạn
+                cung cấp cho chúng tôi thông tin cá nhân bao gồm:
+              </p>
+              <ul>
+                <li>Tên và thông tin liên lạc của bạn</li>
+                <li>Thông tin tài khoản</li>
+                <li>Thông tin thanh toán khi cần thiết</li>
+                <li>Tùy chọn liên lạc</li>
+              </ul>
+
+              <h3>2.2 Automatic Information</h3>
+              <p>
+                Chúng tôi tự động thu thập và lưu trữ một số thông tin nhất định
+                khi bạn sử dụng dịch vụ của chúng tôi:
+              </p>
+              <ul>
+                <li>Thông tin thiết bị và mã định danh</li>
+                <li>Thông tin nhật ký và thống kê sử dụng</li>
+                <li>Thông tin vị trí khi được bật</li>
+                <li>Loại trình duyệt và cài đặt</li>
+              </ul>
+            </div>
+
+            <!-- Use of Information -->
+            <div class="content-section">
+              <h2>3. How We Use Your Information</h2>
+              <p>
+                Chúng tôi sử dụng thông tin thu thập được để cung cấp, duy trì
+                và cải thiện dịch vụ. Cụ thể, chúng tôi sử dụng thông tin của
+                bạn để:
+              </p>
+              <ul>
+                <li>Cung cấp và cá nhân hóa dịch vụ của chúng tôi</li>
+                <li>Xử lý giao dịch và gửi thông tin liên quan</li>
+                <li>Gửi thông báo và cập nhật về dịch vụ của chúng tôi</li>
+                <li>Duy trì bảo mật và xác minh danh tính</li>
+                <li>Phân tích và cải thiện dịch vụ của chúng tôi</li>
+              </ul>
+            </div>
+
+            <!-- Information Sharing -->
+            <div class="content-section">
+              <h2>4. Information Sharing and Disclosure</h2>
+              <p>
+                Chúng tôi không chia sẻ thông tin cá nhân với các công ty, tổ
+                chức hoặc cá nhân bên ngoài công ty chúng tôi, ngoại trừ các
+                trường hợp sau:
+              </p>
+              <h3>4.1 With Your Consent</h3>
+              <p>
+                Chúng tôi sẽ chia sẻ thông tin cá nhân với các công ty, tổ chức
+                hoặc cá nhân bên ngoài công ty chúng tôi khi có sự đồng ý của
+                bạn.
+              </p>
+              <h3>4.2 For Legal Reasons</h3>
+              <p>
+                Chúng tôi sẽ chia sẻ thông tin cá nhân nếu chúng tôi tin tưởng
+                một cách thiện chí rằng việc truy cập, sử dụng, lưu giữ hoặc
+                tiết lộ thông tin là cần thiết một cách hợp lý để:
+              </p>
+              <ul>
+                <li>
+                  Tuân thủ bất kỳ luật, quy định, quy trình pháp lý hoặc yêu cầu
+                  bắt buộc nào của chính phủ
+                </li>
+                <li>Thực thi các Điều khoản Dịch vụ hiện hành</li>
+                <li>
+                  Phát hiện, ngăn chặn hoặc giải quyết các vấn đề gian lận, bảo
+                  mật hoặc kỹ thuật
+                </li>
+                <li>
+                  Bảo vệ quyền, tài sản hoặc sự an toàn của người dùng khỏi bị
+                  xâm hại
+                </li>
+              </ul>
+            </div>
+
+            <!-- Data Security -->
+            <div class="content-section">
+              <h2>5. Data Security</h2>
+              <p>
+                Chúng tôi nỗ lực bảo vệ người dùng khỏi việc truy cập trái phép,
+                thay đổi, tiết lộ hoặc phá hủy trái phép thông tin chúng tôi nắm
+                giữ. Cụ thể:
+              </p>
+              <ul>
+                <li>Chúng tôi mã hóa dịch vụ bằng SSL</li>
+                <li>
+                  Chúng tôi xem xét lại các hoạt động thu thập, lưu trữ và xử lý
+                  thông tin của mình
+                </li>
+                <li>
+                  Chúng tôi hạn chế quyền truy cập thông tin cá nhân chỉ dành
+                  cho những nhân viên cần thông tin đó
+                </li>
+              </ul>
+            </div>
+
+            <!-- Your Rights -->
+            <div class="content-section">
+              <h2>6. Your Rights and Choices</h2>
+              <p>
+                Bạn có một số quyền nhất định liên quan đến thông tin cá nhân
+                của mình, bao gồm:
+              </p>
+              <ul>
+                <li>Quyền truy cập thông tin cá nhân của bạn</li>
+                <li>Quyền sửa thông tin không chính xác</li>
+                <li>Quyền yêu cầu xóa thông tin của bạn</li>
+                <li>
+                  Quyền hạn chế hoặc phản đối việc chúng tôi xử lý thông tin của
+                  bạn
+                </li>
+              </ul>
+            </div>
+
+            <!-- Policy Updates -->
+            <div class="content-section">
+              <h2>7. Changes to This Policy</h2>
+              <p>
+                Chúng tôi có thể cập nhật Chính sách Quyền riêng tư này theo
+                thời gian. Chúng tôi sẽ thông báo cho bạn về bất kỳ thay đổi nào
+                bằng cách đăng Chính sách Quyền riêng tư mới trên trang này và
+                cập nhật ngày có hiệu lực ở đầu trang.
+              </p>
+              <p>
+                Việc bạn tiếp tục sử dụng dịch vụ của chúng tôi sau khi Chính
+                sách Quyền riêng tư này có bất kỳ thay đổi nào đồng nghĩa với
+                việc bạn chấp nhận những thay đổi đó.
+              </p>
+            </div>
+          </div>
+
+          <!-- Contact Section -->
+          <div class="privacy-contact" data-aos="fade-up">
+            <h2>Contact Us</h2>
+            <p>
+              If you have any questions about this Privacy Policy or our
+              practices, please contact us:
+            </p>
+            <div class="contact-details">
+              <p><strong>Email:</strong> privacy@example.com</p>
+              <p>
+                <strong>Address:</strong> 123 Privacy Street, Security City,
+                12345
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- /Privacy Section -->
+    </main>
+
+    <footer id="footer" class="footer position-relative dark-background">
+      <div class="footer-newsletter">
+        <div class="container">
+          <div class="row justify-content-center text-center">
+            <div class="col-lg-6">
+              <h4>Join Our Newsletter</h4>
+              <p>
+                Subscribe to our newsletter and receive the latest news about
+                our products and services!
+              </p>
+              <form
+                action="forms/newsletter.php"
+                method="post"
+                class="php-email-form"
+              >
+                <div class="newsletter-form">
+                  <input type="email" name="email" /><input
+                    type="submit"
+                    value="Subscribe"
+                  />
+                </div>
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">
+                  Your subscription request has been sent. Thank you!
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container footer-top">
+        <div class="row gy-4">
+          <div class="col-lg-4 col-md-6 footer-about">
+            <a href="{% url 'core:home' %}" class="d-flex align-items-center">
+              <span class="sitename">Tour</span>
+            </a>
+            <div class="footer-contact pt-3">
+              <p>A108 Adam Street</p>
+              <p>New York, NY 535022</p>
+              <p class="mt-3">
+                <strong>Phone:</strong> <span>+1 5589 55488 55</span>
+              </p>
+              <p><strong>Email:</strong> <span>info@example.com</span></p>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-md-3 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
+              <li>
+                <i class="bi bi-chevron-right"></i> <a href="#">About us</a>
+              </li>
+              <li>
+                <i class="bi bi-chevron-right"></i> <a href="#">Services</a>
+              </li>
+              <li>
+                <i class="bi bi-chevron-right"></i>
+                <a href="#">Terms of service</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-lg-2 col-md-3 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li>
+                <i class="bi bi-chevron-right"></i> <a href="#">Web Design</a>
+              </li>
+              <li>
+                <i class="bi bi-chevron-right"></i>
+                <a href="#">Web Development</a>
+              </li>
+              <li>
+                <i class="bi bi-chevron-right"></i>
+                <a href="#">Product Management</a>
+              </li>
+              <li>
+                <i class="bi bi-chevron-right"></i> <a href="#">Marketing</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4 col-md-12">
+            <h4>Follow Us</h4>
+            <p>
+              Cras fermentum odio eu feugiat lide par naso tierra videa magna
+              derita valies
+            </p>
+            <div class="social-links d-flex">
+              <a href=""><i class="bi bi-twitter-x"></i></a>
+              <a href=""><i class="bi bi-facebook"></i></a>
+              <a href=""><i class="bi bi-instagram"></i></a>
+              <a href=""><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container copyright text-center mt-4">
+        <p>
+          © <span>Copyright</span>
+          <strong class="px-1 sitename">MyWebsite</strong>
+          <span>All Rights Reserved</span>
+        </p>
+        <div class="credits">Designed by <a href="nhóm 7">nhóm 7</a></div>
+      </div>
+    </footer>
+
+    <!-- Scroll Top -->
+    <a
+      href="#"
+      id="scroll-top"
+      class="scroll-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- Preloader -->
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/vendor/php-email-form/validate.js"></script>
+    <script src="../assets/vendor/aos/aos.js"></script>
+    <script src="../assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+    <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
+
+    <!-- Main JS File -->
+    <script src="../assets/js/main.js"></script>
+  </body>
+</html>

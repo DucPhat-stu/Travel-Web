@@ -1,6 +1,7 @@
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.urls import reverse
+from urllib.parse import quote
 
 class AuthMiddleware:
     """
@@ -28,7 +29,7 @@ class AuthMiddleware:
     def __call__(self, request):
         path = request.path
         
-        # Bỏ qua các URL public
+        # Bỏ qua các URL public - QUAN TRỌNG: phải check trước
         if any(path.startswith(url) for url in self.public_urls):
             response = self.get_response(request)
             return response
@@ -37,8 +38,17 @@ class AuthMiddleware:
         user_id = request.session.get('user_id')
         
         if not user_id:
+            # QUAN TRỌNG: Kiểm tra lại path để tránh loop
+            # Nếu đã ở login page, không redirect nữa
+            if path.startswith('/users/login'):
+                response = self.get_response(request)
+                return response
+            
             messages.warning(request, 'Vui lòng đăng nhập để tiếp tục!')
-            return redirect('users:login')
+            # Thêm tham số next để redirect về URL ban đầu sau khi đăng nhập
+            login_url = reverse('users:login')
+            next_url = quote(request.get_full_path(), safe='/')
+            return redirect(f'{login_url}?next={next_url}')
         
         # Kiểm tra quyền admin cho admin URLs
         if any(path.startswith(url) for url in self.admin_urls):

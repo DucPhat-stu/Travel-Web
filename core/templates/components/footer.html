@@ -1,0 +1,170 @@
+{% load static %}
+<!-- Footer -->
+<footer class="bg-dark text-light py-5 mt-5">
+    <div class="container">
+        <div class="row">
+            <!-- Company Info -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="d-flex align-items-center mb-3">
+                    <img src="{% static 'img/logo.webp' %}" alt="Travel Tourism Logo" class="me-2" style="height: 40px; width: auto;">
+                    <h5 class="mb-0">Travel Tourism</h5>
+                </div>
+                <p class="mb-3">Khám phá thế giới cùng chúng tôi. Chúng tôi cung cấp dịch vụ đặt tour, khách sạn và vé máy bay chất lượng cao với giá cả phải chăng.</p>
+                <div class="social-links">
+                    <a href="#" class="text-light me-3" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="text-light me-3" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="text-light me-3" aria-label="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-light me-3" aria-label="YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-lg-2 col-md-6 mb-4">
+                <h6 class="fw-bold mb-3">Liên kết nhanh</h6>
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <a href="{% url 'core:home' %}" class="text-light text-decoration-none">
+                            <i class="fas fa-chevron-right me-2"></i>Trang chủ
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="{% url 'tours:tour_list' %}" class="text-light text-decoration-none">
+                            <i class="fas fa-chevron-right me-2"></i>Tour du lịch
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="{% url 'hotels:hotel_list' %}" class="text-light text-decoration-none">
+                            <i class="fas fa-chevron-right me-2"></i>Khách sạn
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="{% url 'flight:flight_list' %}" class="text-light text-decoration-none">
+                            <i class="fas fa-chevron-right me-2"></i>Vé máy bay
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="{% url 'core:contact' %}" class="text-light text-decoration-none">
+                            <i class="fas fa-chevron-right me-2"></i>Liên hệ
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Services -->
+            <div class="col-lg-2 col-md-6 mb-4">
+                <h6 class="fw-bold mb-3">Dịch vụ</h6>
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <a href="{% url 'bookings:booking_list' %}" class="text-light text-decoration-none">
+                            <i class="fas fa-chevron-right me-2"></i>Đặt chỗ
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="{% url 'chatbot:chatbot' %}" class="text-light text-decoration-none">
+                            <i class="fas fa-chevron-right me-2"></i>Chatbot hỗ trợ
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" class="text-light text-decoration-none">
+                            <i class="fas fa-chevron-right me-2"></i>Hướng dẫn du lịch
+                        </a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#" class="text-light text-decoration-none">
+                            <i class="fas fa-chevron-right me-2"></i>Khuyến mãi
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Contact Info + Quick Form -->
+            <div class="col-lg-4 col-md-6 mb-4">
+                <h6 class="fw-bold mb-3">Thông tin & Liên hệ nhanh</h6>
+                <div class="contact-info mb-3">
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="fas fa-map-marker-alt me-3 text-primary"></i>
+                        <span>123 Đường ABC, Quận XYZ, TP.HCM, Việt Nam</span>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="fas fa-phone me-3 text-primary"></i>
+                        <span>+84 123 456 789</span>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="fas fa-envelope me-3 text-primary"></i>
+                        <span>info@traveltourism.vn</span>
+                    </div>
+                    <div class="d-flex align-items-center mb-2">
+                        <i class="fas fa-clock me-3 text-primary"></i>
+                        <span>8:00 - 18:00 (Thứ 2 - Chủ nhật)</span>
+                    </div>
+                </div>
+                <!-- Quick contact form (front-end only) -->
+                <form class="bg-secondary bg-opacity-25 p-3 rounded" method="post" action="#">
+                    {% csrf_token %}
+                    <div class="mb-2">
+                        <label class="form-label small mb-1 text-light" for="footerName">Họ tên</label>
+                        <input type="text" class="form-control form-control-sm" id="footerName" name="name" placeholder="Nhập họ tên" required>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label small mb-1 text-light" for="footerEmail">Email</label>
+                        <input type="email" class="form-control form-control-sm" id="footerEmail" name="email" placeholder="you@example.com" required>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label small mb-1 text-light" for="footerMessage">Nội dung</label>
+                        <textarea class="form-control form-control-sm" id="footerMessage" name="message" rows="2" placeholder="Lời nhắn của bạn" required></textarea>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-sm">
+                            <i class="fas fa-paper-plane me-1"></i>Gửi ngay
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Newsletter Signup -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="newsletter-signup bg-primary rounded p-4 text-center">
+                    <h6 class="fw-bold mb-2">Đăng ký nhận tin tức du lịch</h6>
+                    <p class="mb-3">Nhận những ưu đãi đặc biệt và thông tin tour mới nhất</p>
+                    <form class="row g-2 justify-content-center" method="post" action="#">
+                        {% csrf_token %}
+                        <div class="col-md-4 col-sm-6">
+                            <input type="text" class="form-control" name="newsletter_name" placeholder="Họ tên" required>
+                        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <input type="email" class="form-control" name="newsletter_email" placeholder="Email của bạn" required>
+                        </div>
+                        <div class="col-12 col-md-auto">
+                            <button type="submit" class="btn btn-light w-100">
+                            <i class="fas fa-paper-plane me-1"></i>Đăng ký
+                        </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <hr class="my-4">
+        <div class="row">
+            <div class="col-12 text-center">
+                <p class="mb-0">
+                    &copy; 2024 Travel Tourism. Tất cả quyền được bảo lưu.
+                    <span class="ms-2">
+                        Phát triển bởi <a href="#" class="text-light text-decoration-none fw-bold">Travel Tourism Team</a>
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -1,8 +1,7 @@
-version: '3.8'
-
 services:
   db:
     image: postgres:17
+    container_name: travel_db
     volumes:
       - postgres_data:/var/lib/postgresql/data
     environment:
@@ -13,30 +12,31 @@ services:
       - "5432:5432"
     env_file:
       - .env
+
   redis:
     image: redis:7
+    container_name: travel_redis
     ports:
       - "6379:6379"
 
-  web:  # ← THÊM SERVICE NÀY
+  web:
     build: .
-    container_name: travel_tourism_web
+    container_name: travel_web
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app
     ports:
       - "8000:8000"
     environment:
-      - DEBUG=True
-      - DJANGO_ALLOWED_HOSTS=localhost
-      - DJANGO_SCRET_KEY=your_secret_key_here
-      - DJANGO_LOGLEVEL=DEBUG
-      - DATABASE_ENGINE=postgresql
-      - DATABASE_NAME=travel_tourism_db
-      - DATABASE_USERNAME=postgres
-      - DATABASE_PASSWORD=postgres
-      - DATABASE_HOST=db
-      - DATABASE_PORT=5432
+      DEBUG: "True"
+      DJANGO_ALLOWED_HOSTS: "localhost 127.0.0.1"
+      DJANGO_SECRET_KEY: "your_secret_key_here"
+      DATABASE_ENGINE: django.db.backends.postgresql
+      DATABASE_NAME: travel_tourism_db
+      DATABASE_USERNAME: postgres
+      DATABASE_PASSWORD: postgres
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
     depends_on:
       - db
       - redis
@@ -45,6 +45,7 @@ services:
 
   nginx:
     image: nginx:latest
+    container_name: travel_nginx
     ports:
       - "80:80"
     volumes:

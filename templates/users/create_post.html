@@ -1,0 +1,185 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng bài mới</title>
+    
+    <link href="{% static 'img/favicon.png' %}" rel="icon">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: #fafafa;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .post-container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 30px;
+        }
+        
+        .image-preview {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .upload-area {
+            border: 2px dashed #dbdbdb;
+            border-radius: 8px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .upload-area:hover {
+            border-color: #0095f6;
+            background-color: #f8f9fa;
+        }
+        
+        .upload-area i {
+            font-size: 48px;
+            color: #8e8e8e;
+            margin-bottom: 15px;
+        }
+        
+        .btn-primary-custom {
+            background: #0095f6;
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 8px;
+            font-weight: 500;
+            width: 100%;
+        }
+        
+        .btn-primary-custom:hover {
+            background: #0081d9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% if messages %}
+        <div class="mt-3">
+            {% for message in messages %}
+            <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+                {{ message }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        
+        <div class="post-container">
+            <h3 class="mb-4"><i class="bi bi-plus-circle"></i> Đăng bài mới</h3>
+            
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <!-- Image Upload -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Hình ảnh <span class="text-danger">*</span></label>
+                    <div class="upload-area" onclick="document.getElementById('id_image').click()">
+                        <i class="bi bi-cloud-upload"></i>
+                        <p class="mb-0">Click để chọn ảnh</p>
+                        <small class="text-muted">Hoặc kéo thả ảnh vào đây</small>
+                    </div>
+                    {{ form.image }}
+                    <img id="imagePreview" class="image-preview" alt="Preview">
+                </div>
+                
+                <!-- Caption -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Mô tả</label>
+                    {{ form.caption }}
+                    <small class="text-muted d-block mt-1">Chia sẻ trải nghiệm của bạn...</small>
+                </div>
+                
+                <!-- Location -->
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Địa điểm</label>
+                    {{ form.location }}
+                    <small class="text-muted d-block mt-1">Ví dụ: Đà Lạt, Việt Nam</small>
+                </div>
+                
+                <!-- Buttons -->
+                <div class="d-flex gap-2 mt-4">
+                    <button type="submit" class="btn btn-primary-custom">
+                        <i class="bi bi-send"></i> Đăng bài
+                    </button>
+                </div>
+                
+                <div class="mt-3 text-center">
+                    <a href="{% url 'users:profile' %}" class="text-muted">
+                        <i class="bi bi-arrow-left"></i> Quay lại profile
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script>
+        // Hide file input
+        document.getElementById('id_image').style.display = 'none';
+        
+        // Preview image when selected
+        document.getElementById('id_image').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('imagePreview');
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    document.querySelector('.upload-area').style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        // Drag and drop
+        const uploadArea = document.querySelector('.upload-area');
+        
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.style.borderColor = '#0095f6';
+            uploadArea.style.backgroundColor = '#f8f9fa';
+        });
+        
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.style.borderColor = '#dbdbdb';
+            uploadArea.style.backgroundColor = 'white';
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const input = document.getElementById('id_image');
+                const dataTransfer = new DataTransfer();
+                dataTransfer.items.add(file);
+                input.files = dataTransfer.files;
+                
+                // Trigger change event
+                const event = new Event('change');
+                input.dispatchEvent(event);
+            }
+        });
+    </script>
+</body>
+</html>

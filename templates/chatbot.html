@@ -1,0 +1,248 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Chatbot - Tour Bootstrap Template</title>
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+
+  <!-- Favicons -->
+  <link href="../assets/img/favicon.png" rel="icon">
+  <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="../assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="../assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="../assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="../assets/css/main.css" rel="stylesheet">
+<style>
+/* ---- BACKGROUND TOÀN TRANG ---- */
+body {
+  background-image: url('../assets/img/gallery/gallery-5.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+  margin: 0;
+  width: 100%;
+  height: 100vh;
+}
+/* ---- CONTAINER CHATBOT ---- */
+.chatbot-container {
+    width: 70%;
+    margin: 60px auto;
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.35);
+}
+
+/* ---- TIÊU ĐỀ ---- */
+.chat-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+}
+
+.chat-header i {
+    font-size: 40px;
+    color: #6f42c1;
+}
+
+.chat-header-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #ffffff;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+/* ---- Ô CHAT ---- */
+.chat-box {
+    margin-top: 25px;
+    height: 400px;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* Tin nhắn bot */
+.message-bot {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: rgba(255,255,255,0.75);
+    padding: 15px 20px;
+    width: fit-content;
+    max-width: 75%;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+}
+
+/* Icon bot */
+.message-bot i {
+    font-size: 28px;
+    color: #0d6efd;
+}
+
+/* ---- INPUT GỬI TIN ---- */
+.chat-input-area {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.input-box {
+    flex: 1;
+    padding: 15px 20px;
+    border-radius: 15px;
+    border: none;
+    font-size: 16px;
+    outline: none;
+    background: rgba(255,255,255,0.85);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.send-btn {
+    margin-left: 12px;
+    border: none;
+    background: #0d6efd;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    transition: 0.25s;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.send-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    background: #0b5ed7;
+}
+</style>
+
+</head>
+
+<body class="contact-page">
+
+  <header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
+
+      <a href="{% url 'core:home' %}" class="logo d-flex align-items-center me-auto me-xl-0">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="{% static 'img/logo.webp' %}" alt=""> -->
+        <h1 class="sitename">Tour</h1>
+      </a>
+
+      <nav id="navmenu" class="navmenu">
+        <ul>
+          <li><a href="{% url 'core:home' %}">Home</a></li>
+          <li><a href="{% url 'core:about' %}">About</a></li>
+          <li><a href="{% url 'core:destinations' %}">Destinations</a></li>
+          <li><a href="{% url 'tours:tour_list' %}">Tours</a></li>
+          <li><a href="{% url 'core:gallery' %}">Gallery</a></li>
+          <li><a href="{% url 'core:blog' %}">Blog</a></li>
+          <li class="dropdown"><a href="#"><span>More Pages</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="{% url 'core:destinations' %}">Destination Details</a></li>
+              <li><a href="{% url 'tours:tour_list' %}">Tour Details</a></li>
+              <li><a href="{% url 'bookings:booking_list' %}">Booking</a></li>
+              <li><a href="{% url 'core:testimonials' %}">Testimonials</a></li>
+              <li><a href="{% url 'core:faq' %}">Frequently Asked Questions</a></li>
+              <li><a href="{% url 'core:blog' %}">Blog Details</a></li>
+              <li><a href="{% url 'core:terms' %}">Terms</a></li>
+              <li><a href="{% url 'core:privacy' %}">Privacy</a></li>
+            </ul>
+          </li>
+          <li class="dropdown"><a href="#"><span>Other amenities</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+            <ul>
+              <li><a href="{% url 'flight:flight_list' %}">Flight</a></li>
+              <li><a href="{% url 'chatbot:chatbot' %}" class="active">Chatbot</a></li>
+            </ul>
+          </li>
+          <li><a href="{% url 'core:contact' %}">Contact</a></li>
+        </ul>
+        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+      </nav>
+      <a class="btn-getstarted" href="{% url 'users:logout' %}">log out</a>     
+
+    </div>
+  </header>
+
+ <div class="chatbot-container">
+    <div class="chat-header">
+        <i class="bi bi-robot"></i>
+        <div class="chat-header-title">TRAVEL ASSISTANT</div>
+    </div>
+
+    <div class="chat-box">
+        <div class="message-bot">
+            <i class="bi bi-robot"></i>
+            <div>Xin chào! Tôi có thể hỗ trợ bạn đặt tour, xem giá, tìm khách sạn hoặc tư vấn lịch trình.</div>
+        </div>
+    </div>
+
+    <div class="chat-input-area">
+        <input type="text" class="input-box" placeholder="Nhập câu hỏi của bạn...">
+        <button class="send-btn"><i class="bi bi-send"></i></button>
+    </div>
+</div>
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+
+  <!-- Vendor JS Files -->
+  <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="../assets/vendor/php-email-form/validate.js"></script>
+  <script src="../assets/vendor/aos/aos.js"></script>
+  <script src="../assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+  <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+  <script src="../assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+  <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
+
+  <!-- Main JS File -->
+  <script src="../assets/js/main.js"></script>
+<style>
+/* ===== Combined Modern Travel Chatbot CSS ===== */
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
+body { background:#f2f6fa; display:flex; justify-content:center; align-items:center; height:100vh; }
+#chatbot-container { width:420px; height:650px; background:#fff; border-radius:22px; box-shadow:0 15px 35px rgba(0,0,0,0.12); display:flex; flex-direction:column; overflow:hidden; }
+#header { background:linear-gradient(135deg,#f1f1f1,#1aa3ec); padding:22px; color:white; display:flex; align-items:center; gap:12px; }
+#header img { width:50px; height:50px; border-radius:50%; border:3px solid rgba(255,255,255,0.7); }
+#header h2 { font-size:20px; font-weight:600; }
+#messages { flex:1; padding:18px; overflow-y:auto; background:#eef4f8; }
+.message { max-width:85%; padding:12px 16px; border-radius:16px; margin-bottom:12px; font-size:14px; line-height:1.4; }
+.bot-msg { background:white; align-self:flex-start; border:1px solid #d9e2ec; }
+.user-msg { background:#0077b6; color:white; align-self:flex-end; }
+#input-area { display:flex; padding:12px; background:white; border-top:1px solid #d9e2ec; }
+#input-area input { flex:1; padding:12px 16px; border:1px solid #cfd9e2; border-radius:14px; outline:none; font-size:15px; }
+#input-area button { margin-left:10px; background:#0096c7; color:white; border:none; padding:0 20px; border-radius:14px; font-size:15px; cursor:pointer; transition:0.2s; }
+#input-area button:hover { background:#0077b6; }
+</style>
+
+</body>
+
+</html>

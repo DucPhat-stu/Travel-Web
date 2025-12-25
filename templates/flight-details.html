@@ -1,0 +1,330 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Flight Details - Tour Bootstrap Template</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <!-- Favicons -->
+    <link href="../assets/img/favicon.png" rel="icon" />
+    <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link
+      href="../assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="../assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link
+      href="../assets/vendor/swiper/swiper-bundle.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../assets/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Main CSS File -->
+    <link href="../assets/css/main.css" rel="stylesheet" />
+  </head>
+
+  <body class="faq-page">
+    <header id="header" class="header d-flex align-items-center fixed-top">
+      <div
+        class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between"
+      >
+        <a
+          href="{% url 'core:home' %}"
+          class="logo d-flex align-items-center me-auto me-xl-0"
+        >
+          <!-- Uncomment the line below if you also wish to use an image logo -->
+          <!-- <img src="{% static 'img/logo.webp' %}" alt=""> -->
+          <h1 class="sitename">Tour</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="{% url 'core:home' %}">Home</a></li>
+            <li><a href="{% url 'core:about' %}">About</a></li>
+            <li><a href="{% url 'core:destinations' %}">Destinations</a></li>
+            <li><a href="{% url 'tours:tour_list' %}">Tours</a></li>
+            <li><a href="{% url 'core:gallery' %}">Gallery</a></li>
+            <li><a href="{% url 'core:blog' %}">Blog</a></li>
+            <li class="dropdown">
+              <a href="#"
+                ><span>More Pages</span>
+                <i class="bi bi-chevron-down toggle-dropdown"></i
+              ></a>
+              <ul>
+                <li>
+                  <a href="{% url 'core:destinations' %}">Destination Details</a>
+                </li>
+                <li><a href="{% url 'tours:tour_list' %}">Tour Details</a></li>
+                <li><a href="{% url 'bookings:booking_list' %}">Booking</a></li>
+                <li><a href="{% url 'core:testimonials' %}">Testimonials</a></li>
+                <li><a href="{% url 'core:faq' %}">Frequently Asked Questions</a></li>
+                <li><a href="{% url 'core:blog' %}">Blog Details</a></li>
+                <li><a href="{% url 'core:terms' %}">Terms</a></li>
+                <li><a href="{% url 'core:privacy' %}">Privacy</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#"
+                ><span>Other amenities</span>
+                <i class="bi bi-chevron-down toggle-dropdown"></i
+              ></a>
+              <ul>
+                <li><a href="{% url 'flight:flight_list' %}" class="active">Flight</a></li>
+                <li><a href="{% url 'chatbot:chatbot' %}">Chatbot</a></li>
+              </ul>
+            </li>
+            <li><a href="{% url 'core:contact' %}">Contact</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+        {% if user.is_authenticated %}
+          <a class="btn-getstarted" href="{% url 'users:logout' %}">log out</a>
+        {% else %}
+          <a class="btn-getstarted" href="{% url 'users:login' %}">log in</a>
+        {% endif %}
+      </div>
+    </header>
+
+    <main class="main">
+      <!-- Page Title -->
+      <div
+        class="page-title dark-background"
+        data-aos="fade"
+        style="background-image: url(../assets/img/travel/showcase-8.webp)"
+      >
+        <div class="container position-relative">
+          <h1>Flight</h1>
+          <p>
+            Esse dolorum voluptatum ullam est sint nemo et est ipsa porro
+            placeat quibusdam quia assumenda numquam molestias.
+          </p>
+          <nav class="breadcrumbs">
+            <ol>
+              <li><a href="{% url 'core:home' %}">Home</a></li>
+              <li class="current">Flight</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+      <!-- End Page Title -->
+
+      <!-- Search Form -->
+      <section class="container my-5">
+        <div id="flightInfo" class="card p-4 shadow-sm">
+          <div class="text-center">
+            <div class="spinner-border text-primary" role="status"></div>
+          </div>
+        </div>
+      </section>
+
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+      <script>
+        async function loadFlightDetails() {
+          const params = new URLSearchParams(window.location.search);
+          const flightId = params.get("id");
+          const infoDiv = document.getElementById("flightInfo");
+
+          if (!flightId) {
+            infoDiv.innerHTML =
+              "<p class='text-danger text-center'>Flight ID not provided.</p>";
+            return;
+          }
+
+          try {
+            const response = await fetch(`/api/flights/${flightId}/`);
+            if (!response.ok) throw new Error("Network response was not ok");
+            const flight = await response.json();
+
+            infoDiv.innerHTML = `
+      <h2 class="card-title mb-3 text-center">${flight.airline}</h2>
+      <ul class="list-group list-group-flush mb-3">
+        <li class="list-group-item"><strong>From:</strong> ${flight.from}</li>
+        <li class="list-group-item"><strong>To:</strong> ${flight.to}</li>
+        <li class="list-group-item"><strong>Departure:</strong> ${
+          flight.departure_date
+        }</li>
+        <li class="list-group-item"><strong>Return:</strong> ${
+          flight.return_date || "N/A"
+        }</li>
+        <li class="list-group-item"><strong>Duration:</strong> ${
+          flight.duration
+        }</li>
+        <li class="list-group-item"><strong>Price:</strong> $${
+          flight.price
+        }</li>
+      </ul>
+      <div class="text-center">
+        <button class="btn btn-primary" onclick="bookFlight(${
+          flight.id
+        })">Book Now</button>
+      </div>
+    `;
+          } catch (error) {
+            infoDiv.innerHTML = `<p class="text-danger text-center">Error: ${error.message}</p>`;
+          }
+        }
+
+        function bookFlight(id) {
+          alert(`Flight ${id} booked! (Integration with backend needed)`);
+        }
+
+        window.onload = loadFlightDetails;
+      </script>
+    </main>
+
+    <footer id="footer" class="footer position-relative dark-background">
+      <div class="footer-newsletter">
+        <div class="container">
+          <div class="row justify-content-center text-center">
+            <div class="col-lg-6">
+              <h4>Join Our Newsletter</h4>
+              <p>
+                Subscribe to our newsletter and receive the latest news about
+                our products and services!
+              </p>
+              <form
+                action="forms/newsletter.php"
+                method="post"
+                class="php-email-form"
+              >
+                <div class="newsletter-form">
+                  <input type="email" name="email" /><input
+                    type="submit"
+                    value="Subscribe"
+                  />
+                </div>
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">
+                  Your subscription request has been sent. Thank you!
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container footer-top">
+        <div class="row gy-4">
+          <div class="col-lg-4 col-md-6 footer-about">
+            <a href="{% url 'core:home' %}" class="d-flex align-items-center">
+              <span class="sitename">Tour</span>
+            </a>
+            <div class="footer-contact pt-3">
+              <p>A108 Adam Street</p>
+              <p>New York, NY 535022</p>
+              <p class="mt-3">
+                <strong>Phone:</strong> <span>+1 5589 55488 55</span>
+              </p>
+              <p><strong>Email:</strong> <span>info@example.com</span></p>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-md-3 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
+              <li>
+                <i class="bi bi-chevron-right"></i> <a href="#">About us</a>
+              </li>
+              <li>
+                <i class="bi bi-chevron-right"></i> <a href="#">Services</a>
+              </li>
+              <li>
+                <i class="bi bi-chevron-right"></i>
+                <a href="#">Terms of service</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-lg-2 col-md-3 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li>
+                <i class="bi bi-chevron-right"></i> <a href="#">Web Design</a>
+              </li>
+              <li>
+                <i class="bi bi-chevron-right"></i>
+                <a href="#">Web Development</a>
+              </li>
+              <li>
+                <i class="bi bi-chevron-right"></i>
+                <a href="#">Product Management</a>
+              </li>
+              <li>
+                <i class="bi bi-chevron-right"></i> <a href="#">Marketing</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4 col-md-12">
+            <h4>Follow Us</h4>
+            <p>
+              Cras fermentum odio eu feugiat lide par naso tierra videa magna
+              derita valies
+            </p>
+            <div class="social-links d-flex">
+              <a href=""><i class="bi bi-twitter-x"></i></a>
+              <a href=""><i class="bi bi-facebook"></i></a>
+              <a href=""><i class="bi bi-instagram"></i></a>
+              <a href=""><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container copyright text-center mt-4">
+        <p>
+          © <span>Copyright</span>
+          <strong class="px-1 sitename">MyWebsite</strong>
+          <span>All Rights Reserved</span>
+        </p>
+        <div class="credits">Designed by <a href="nhóm 7">nhóm 7</a></div>
+      </div>
+    </footer>
+
+    <!-- Scroll Top -->
+    <a
+      href="#"
+      id="scroll-top"
+      class="scroll-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- Preloader -->
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/vendor/php-email-form/validate.js"></script>
+    <script src="../assets/vendor/aos/aos.js"></script>
+    <script src="../assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+    <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
+
+    <!-- Main JS File -->
+    <script src="../assets/js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,641 @@
+  {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>About - Tour Bootstrap Template</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicons -->
+    <link href="../assets/img/favicon.png" rel="icon" />
+    <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link
+      href="../assets/vendor/bootstrap/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../assets/vendor/bootstrap-icons/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link href="../assets/vendor/aos/aos.css" rel="stylesheet" />
+    <link
+      href="../assets/vendor/swiper/swiper-bundle.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="../assets/vendor/glightbox/css/glightbox.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Main CSS File -->
+    <link href="../assets/css/main.css" rel="stylesheet" />
+  </head>
+
+  <body class="about-page">
+    <header id="header" class="header d-flex align-items-center fixed-top">
+      <div
+        class="header-container container-fluid container-xl position-relative d-flex align-items-center justify-content-between"
+      >
+        <a
+          href="{% url 'core:home' %}"
+          class="logo d-flex align-items-center me-auto me-xl-0"
+        >
+          <h1 class="sitename">Tour</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="{% url 'core:home' %}">Home</a></li>
+            <li><a href="{% url 'core:about' %}" class="active">About</a></li>
+            <li><a href="{% url 'core:destinations' %}">Destinations</a></li>
+            <li><a href="{% url 'tours:tour_list' %}">Tours</a></li>
+            <li><a href="{% url 'core:gallery' %}">Gallery</a></li>
+            <li><a href="{% url 'core:blog' %}">Blog</a></li>
+            <li class="dropdown">
+              <a href="#"
+                ><span>More Pages</span>
+                <i class="bi bi-chevron-down toggle-dropdown"></i
+              ></a>
+              <ul>
+                <li>
+                  <a href="{% url 'core:destinations' %}">Destination Details</a>
+                </li>
+                <li><a href="{% url 'tours:tour_list' %}">Tour Details</a></li>
+                <li><a href="{% url 'bookings:booking_list' %}">Booking</a></li>
+                <li><a href="{% url 'core:testimonials' %}">Testimonials</a></li>
+                <li><a href="{% url 'core:faq' %}">Frequently Asked Questions</a></li>
+                <li><a href="{% url 'core:blog' %}">Blog Details</a></li>
+                <li><a href="{% url 'core:terms' %}">Terms</a></li>
+                <li><a href="{% url 'core:privacy' %}">Privacy</a></li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#"
+                ><span>other amenities</span>
+                <i class="bi bi-chevron-down toggle-dropdown"></i
+              ></a>
+              <ul>
+                <li><a href="{% url 'flight:flight_list' %}">Flight</a></li>
+                <li><a href="{% url 'chatbot:chatbot' %}">Chatbot</a></li>
+              </ul>
+            </li>
+            <li><a href="{% url 'core:contact' %}">Contact</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+        {% if user.is_authenticated %}
+          <a class="btn-getstarted" href="{% url 'users:logout' %}">log out</a>
+        {% else %}
+          <a class="btn-getstarted" href="{% url 'users:login' %}">log in</a>
+        {% endif %}
+      </div>
+    </header>
+
+    <main class="main">
+      <!-- Page Title -->
+      <div
+        class="page-title dark-background"
+        data-aos="fade"
+        style="background-image: url(../assets/img/travel/showcase-8.webp)"
+      >
+        <div class="container position-relative">
+          <h1>About</h1>
+          <p>
+            Chúng tôi là đơn vị cung cấp tour du lịch uy tín trong và ngoài
+            nước, mang đến những hành trình an toàn, chất lượng và đáng nhớ. Với
+            đội ngũ chuyên nghiệp, am hiểu điểm đến và hỗ trợ 24/7, chúng tôi
+            cam kết mang đến trải nghiệm trọn vẹn với dịch vụ tận tâm và giá cả
+            minh bạch.
+          </p>
+          <nav class="breadcrumbs">
+            <ol>
+              <li><a href="{% url 'core:home' %}">Home</a></li>
+              <li class="current">About</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+      <!-- End Page Title -->
+
+      <!-- Travel About Section -->
+      <section id="travel-about" class="travel-about section">
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+          <div class="row">
+            <div class="col-lg-8 mx-auto text-center mb-5">
+              <div
+                class="intro-content"
+                data-aos="fade-up"
+                data-aos-delay="200"
+              >
+                <h2>
+                  Định nghĩa lại du lịch,<br />Một cuộc phiêu lưu tại một thời
+                  điểm
+                </h2>
+                <p class="lead">
+                  Xuất phát từ niềm đam mê khám phá và tìm tòi, chúng tôi đã
+                  dành cả thập kỷ qua để biến niềm đam mê du lịch thành những
+                  trải nghiệm thay đổi cuộc sống cho những tâm hồn ưa mạo hiểm
+                  trên toàn cầu.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row align-items-center mb-5">
+            <div class="col-lg-5" data-aos="zoom-in" data-aos-delay="300">
+              <div class="hero-image">
+                <img
+                  src="../assets/img/travel/showcase-7.webp"
+                  class="img-fluid"
+                  alt="Travel Adventure"
+                />
+                <div class="floating-stats">
+                  <div class="stat-item">
+                    <span class="number">50+</span>
+                    <span class="label">Countries</span>
+                  </div>
+                  <div class="stat-item">
+                    <span class="number">15K</span>
+                    <span class="label">Happy Travelers</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="col-lg-6 offset-lg-1"
+              data-aos="slide-left"
+              data-aos-delay="400"
+            >
+              <div class="story-content">
+                <div class="story-badge">
+                  <i class="bi bi-compass"></i>
+                  <span>Câu chuyện của chúng tôi</span>
+                </div>
+                <h3>Nơi đam mê gặp gỡ mục đích</h3>
+                <p>
+                  Khởi đầu là những chuyến cắm trại cuối tuần giữa những người
+                  bạn đại học, giờ đây đã phát triển thành một mạng lưới toàn
+                  cầu những người đam mê du lịch, tận tâm tạo nên những chuyến
+                  đi phi thường. Chúng tôi tin rằng du lịch không chỉ là khám
+                  phá những địa điểm mới – mà còn là kết nối với các nền văn
+                  hóa, hỗ trợ cộng đồng và khám phá những khía cạnh tiềm ẩn
+                  trong chính bạn mà bạn chưa từng biết đến.
+                </p>
+                <p>
+                  Mỗi chuyến thám hiểm chúng tôi thực hiện đều thấm đẫm sự tôn
+                  trọng truyền thống địa phương và cam kết gìn giữ những địa
+                  điểm tốt đẹp hơn khi chúng tôi đến. Đội ngũ đại sứ văn hóa và
+                  chuyên gia phiêu lưu của chúng tôi luôn sát cánh cùng hướng
+                  dẫn viên bản địa để mang đến cho bạn những trải nghiệm chân
+                  thực mà hầu hết du khách chưa từng được trải nghiệm..
+                </p>
+
+                <div class="mission-box">
+                  <div class="mission-icon">
+                    <i class="bi bi-globe-americas"></i>
+                  </div>
+                  <div class="mission-text">
+                    <h4>Tầm nhìn của chúng tôi</h4>
+                    <p>
+                      "Để thế giới trở nên kết nối và nhân ái hơn, qua từng hành
+                      trình ý nghĩa."
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-12">
+              <div
+                class="features-grid"
+                data-aos="fade-up"
+                data-aos-delay="200"
+              >
+                <div class="section-header text-center mb-5">
+                  <h3>Điều gì làm chúng ta khác biệt</h3>
+                  <p>Sáu mục định nghĩa mọi cuộc phiêu lưu chúng ta tạo ra</p>
+                </div>
+
+                <div class="row g-4">
+                  <div
+                    class="col-lg-4 col-md-6"
+                    data-aos="fade-up"
+                    data-aos-delay="300"
+                  >
+                    <div class="feature-card">
+                      <div class="feature-front">
+                        <div class="feature-icon">
+                          <i class="bi bi-people"></i>
+                        </div>
+                        <h4>Quan hệ đối tác địa phương</h4>
+                        <p>Hợp tác trực tiếp với cộng đồng bản địa</p>
+                      </div>
+                      <div class="feature-back">
+                        <p>
+                          Chúng tôi chỉ hợp tác với những hướng dẫn viên địa
+                          phương là những người kể chuyện đầy nhiệt huyết và là
+                          đại sứ văn hóa, đảm bảo mang đến những trải nghiệm
+                          chân thực đồng thời hỗ trợ nền kinh tế địa phương.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="col-lg-4 col-md-6"
+                    data-aos="fade-up"
+                    data-aos-delay="400"
+                  >
+                    <div class="feature-card">
+                      <div class="feature-front">
+                        <div class="feature-icon">
+                          <i class="bi bi-heart-pulse"></i>
+                        </div>
+                        <h4>An toàn là trên hết</h4>
+                        <p>
+                          Các giao thức an toàn toàn diện và hỗ trợ khẩn cấp
+                        </p>
+                      </div>
+                      <div class="feature-back">
+                        <p>
+                          Từ các buổi hướng dẫn an toàn trước chuyến đi đến các
+                          đội ứng phó khẩn cấp 24/7, sức khỏe của bạn là ưu tiên
+                          hàng đầu của chúng tôi trong mọi chuyến phiêu lưu.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="col-lg-4 col-md-6"
+                    data-aos="fade-up"
+                    data-aos-delay="500"
+                  >
+                    <div class="feature-card">
+                      <div class="feature-front">
+                        <div class="feature-icon">
+                          <i class="bi bi-recycle"></i>
+                        </div>
+                        <h4>Có ý thức về Carbon</h4>
+                        <p>Bù đắp 150% lượng khí thải từ hoạt động du lịch</p>
+                      </div>
+                      <div class="feature-back">
+                        <p>
+                          Thông qua các dự án tái trồng rừng và đầu tư vào năng
+                          lượng tái tạo, chúng tôi đảm bảo mọi chuyến đi đều góp
+                          phần tích cực vào việc phục hồi môi trường.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="col-lg-4 col-md-6"
+                    data-aos="fade-up"
+                    data-aos-delay="300"
+                  >
+                    <div class="feature-card">
+                      <div class="feature-front">
+                        <div class="feature-icon">
+                          <i class="bi bi-sliders"></i>
+                        </div>
+                        <h4>Hành trình được thiết kế riêng</h4>
+                        <p>
+                          Những cuộc phiêu lưu được thiết kế theo sở thích của
+                          bạn
+                        </p>
+                      </div>
+                      <div class="feature-back">
+                        <p>
+                          Không có tour du lịch rập khuôn nào ở đây. Mỗi hành
+                          trình đều được tùy chỉnh dựa trên phong cách du lịch,
+                          thể lực và sở thích cá nhân của bạn.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="col-lg-4 col-md-6"
+                    data-aos="fade-up"
+                    data-aos-delay="400"
+                  >
+                    <div class="feature-card">
+                      <div class="feature-front">
+                        <div class="feature-icon">
+                          <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h4>Chính sách linh hoạt</h4>
+                        <p>Cuộc sống diễn ra, chúng ta hiểu</p>
+                      </div>
+                      <div class="feature-back">
+                        <p>
+                          Hủy miễn phí trước 30 ngày khởi hành, dễ dàng thay đổi
+                          ngày và các tùy chọn bảo hiểm du lịch toàn diện giúp
+                          bạn an tâm.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    class="col-lg-4 col-md-6"
+                    data-aos="fade-up"
+                    data-aos-delay="500"
+                  >
+                    <div class="feature-card">
+                      <div class="feature-front">
+                        <div class="feature-icon">
+                          <i class="bi bi-star"></i>
+                        </div>
+                        <h4>Ký ức trọn đời</h4>
+                        <p>Những trải nghiệm làm thay đổi quan điểm</p>
+                      </div>
+                      <div class="feature-back">
+                        <p>
+                          Những du khách của chúng tôi thường chia sẻ rằng hành
+                          trình cùng chúng tôi đã thay đổi cách nhìn nhận cuộc
+                          sống của họ. Chúng tôi tạo nên những khoảnh khắc sẽ
+                          trở thành kỷ niệm đáng trân trọng trong nhiều năm tới.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-5">
+            <div class="col-lg-12">
+              <div
+                class="journey-timeline"
+                data-aos="fade-up"
+                data-aos-delay="200"
+              >
+                <div class="timeline-header text-center mb-5">
+                  <h3>Những cột mốc trong cuộc phiêu lưu của chúng tôi</h3>
+                  <p>
+                    Những khoảnh khắc quan trọng đã hình thành nên con người
+                    chúng ta ngày hôm nay
+                  </p>
+                </div>
+
+                <div class="timeline-container">
+                  <div class="timeline-track"></div>
+
+                  <div
+                    class="timeline-milestone"
+                    data-aos="slide-right"
+                    data-aos-delay="300"
+                  >
+                    <div class="milestone-marker">
+                      <span class="year">2014</span>
+                    </div>
+                    <div class="milestone-content">
+                      <h4>Sự khởi đầu</h4>
+                      <p>
+                        Ba người bạn đại học đã biến niềm đam mê khám phá của
+                        mình thành sứ mệnh chia sẻ những điều kỳ thú ẩn giấu với
+                        những nhà thám hiểm khác trên khắp lục địa.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div
+                    class="timeline-milestone"
+                    data-aos="slide-left"
+                    data-aos-delay="400"
+                  >
+                    <div class="milestone-marker">
+                      <span class="year">2017</span>
+                    </div>
+                    <div class="milestone-content">
+                      <h4>Mở rộng toàn cầu</h4>
+                      <p>
+                        Thiết lập quan hệ đối tác với các hướng dẫn viên địa
+                        phương ở Đông Nam Á và Nam Mỹ, mang triết lý du lịch
+                        đích thực của chúng tôi đến những châu lục mới.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div
+                    class="timeline-milestone"
+                    data-aos="slide-right"
+                    data-aos-delay="500"
+                  >
+                    <div class="milestone-marker">
+                      <span class="year">2020</span>
+                    </div>
+                    <div class="milestone-content">
+                      <h4>Tác động cộng đồng</h4>
+                      <p>
+                        Ra mắt sáng kiến ​​du lịch bền vững, hỗ trợ trực tiếp
+                        hơn 200 gia đình địa phương thông qua quan hệ đối tác
+                        việc làm và thương mại công bằng.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div
+                    class="timeline-milestone"
+                    data-aos="slide-left"
+                    data-aos-delay="600"
+                  >
+                    <div class="milestone-marker">
+                      <span class="year">2024</span>
+                    </div>
+                    <div class="milestone-content">
+                      <h4>Tương lai phía trước</h4>
+                      <p>
+                        Đạt được chứng nhận B-Corp và cam kết trở thành công ty
+                        du lịch tái tạo hoàn toàn đầu tiên vào năm 2030.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-5">
+            <div class="col-lg-12">
+              <div class="cta-banner" data-aos="zoom-in" data-aos-delay="300">
+                <div class="cta-overlay">
+                  <div class="cta-content">
+                    <h3>Cuộc phiêu lưu tiếp theo của bạn đang chờ đón</h3>
+                    <p>
+                      Tham gia cùng hàng ngàn du khách đã khám phá ra sự khác
+                      biệt mà du lịch đích thực và có trách nhiệm mang lại.
+                    </p>
+                    <div class="cta-buttons">
+                      <a href="{% url 'core:destinations' %}" class="btn btn-primary me-3"
+                        >Explore Destinations</a
+                      >
+                      <a href="contact.html" class="btn btn-outline"
+                        >Chat with an Expert</a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- /Travel About Section -->
+    </main>
+
+    <footer id="footer" class="footer position-relative dark-background">
+      <div class="footer-newsletter">
+        <div class="container">
+          <div class="row justify-content-center text-center">
+            <div class="col-lg-6">
+              <h4>Join Our Newsletter</h4>
+              <p>
+                Subscribe to our newsletter and receive the latest news about
+                our products and services!
+              </p>
+              <form
+                action="forms/newsletter.php"
+                method="post"
+                class="php-email-form"
+              >
+                <div class="newsletter-form">
+                  <input type="email" name="email" /><input
+                    type="submit"
+                    value="Subscribe"
+                  />
+                </div>
+                <div class="loading">Loading</div>
+                <div class="error-message"></div>
+                <div class="sent-message">
+                  Your subscription request has been sent. Thank you!
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container footer-top">
+        <div class="row gy-4">
+          <div class="col-lg-4 col-md-6 footer-about">
+            <a href="{% url 'core:home' %}" class="d-flex align-items-center">
+              <span class="sitename">Tour</span>
+            </a>
+            <div class="footer-contact pt-3">
+              <p>A108 Adam Street</p>
+              <p>New York, NY 535022</p>
+              <p class="mt-3">
+                <strong>Phone:</strong> <span>+1 5589 55488 55</span>
+              </p>
+              <p><strong>Email:</strong> <span>info@example.com</span></p>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-md-3 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
+              <li>
+                <i class="bi bi-chevron-right"></i> <a href="#">About us</a>
+              </li>
+              <li>
+                <i class="bi bi-chevron-right"></i> <a href="#">Services</a>
+              </li>
+              <li>
+                <i class="bi bi-chevron-right"></i>
+                <a href="#">Terms of service</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-lg-2 col-md-3 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li>
+                <i class="bi bi-chevron-right"></i> <a href="#">Web Design</a>
+              </li>
+              <li>
+                <i class="bi bi-chevron-right"></i>
+                <a href="#">Web Development</a>
+              </li>
+              <li>
+                <i class="bi bi-chevron-right"></i>
+                <a href="#">Product Management</a>
+              </li>
+              <li>
+                <i class="bi bi-chevron-right"></i> <a href="#">Marketing</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4 col-md-12">
+            <h4>Follow Us</h4>
+            <p>
+              Cras fermentum odio eu feugiat lide par naso tierra videa magna
+              derita valies
+            </p>
+            <div class="social-links d-flex">
+              <a href=""><i class="bi bi-twitter-x"></i></a>
+              <a href=""><i class="bi bi-facebook"></i></a>
+              <a href=""><i class="bi bi-instagram"></i></a>
+              <a href=""><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container copyright text-center mt-4">
+        <p>
+          © <span>Copyright</span>
+          <strong class="px-1 sitename">MyWebsite</strong>
+          <span>All Rights Reserved</span>
+        </p>
+        <div class="credits">Designed by <a href="nhóm 7">nhóm 7</a></div>
+      </div>
+    </footer>
+
+    <!-- Scroll Top -->
+    <a
+      href="#"
+      id="scroll-top"
+      class="scroll-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- Preloader -->
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/vendor/php-email-form/validate.js"></script>
+    <script src="../assets/vendor/aos/aos.js"></script>
+    <script src="../assets/vendor/purecounter/purecounter_vanilla.js"></script>
+    <script src="../assets/vendor/swiper/swiper-bundle.min.js"></script>
+    <script src="../assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+    <script src="../assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+    <script src="../assets/vendor/glightbox/js/glightbox.min.js"></script>
+
+    <!-- Main JS File -->
+    <script src="../assets/js/main.js"></script>
+  </body>
+</html>

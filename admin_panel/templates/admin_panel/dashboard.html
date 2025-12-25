@@ -1,0 +1,211 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin Dashboard - Travel Tour</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Favicons -->
+    <link href="{% static 'img/favicon.png' %}" rel="icon" />
+    <link href="{% static 'img/apple-touch-icon.png' %}" rel="apple-touch-icon" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@300;400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS -->
+    <link
+      href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}"
+      rel="stylesheet"
+    />
+    <link href="{% static 'vendor/aos/aos.css' %}" rel="stylesheet" />
+    <link
+      href="{% static 'vendor/swiper/swiper-bundle.min.css' %}"
+      rel="stylesheet"
+    />
+    <link
+      href="{% static 'vendor/glightbox/css/glightbox.min.css' %}"
+      rel="stylesheet"
+    />
+
+    <!-- Main CSS -->
+    <link href="{% static 'css/main.css' %}" rel="stylesheet" />
+
+    <style>
+      body {
+        background: #f3f4f6;
+        font-family: "Poppins", sans-serif;
+      }
+
+      .sidebar {
+        width: 250px;
+        height: 100vh;
+        background: #1f2937;
+        color: white;
+        position: fixed;
+        left: 0;
+        top: 0;
+        padding-top: 20px;
+        z-index: 999;
+      }
+
+      .sidebar a {
+        color: #d1d5db;
+        text-decoration: none;
+        padding: 12px 20px;
+        display: block;
+        font-size: 15px;
+      }
+
+      .sidebar a:hover {
+        background: #374151;
+        color: #fff;
+      }
+
+      .content {
+        margin-left: 250px;
+        padding: 25px;
+      }
+
+      .card {
+        border-radius: 12px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <h4 class="text-center mb-4">Admin Panel</h4>
+
+      <a href="/admin-panel/"
+        ><i class="bi bi-speedometer2"></i> Dashboard</a
+      >
+      <a href="/admin-panel/database-stats/"
+        ><i class="bi bi-database"></i> DataView</a
+      >
+      <a href="/django-admin/login/?next=/django-admin/"
+        ><i class="bi bi-gear"></i> Django Admin</a
+      >
+      <a href="/" class="text-danger"
+        ><i class="bi bi-box-arrow-right"></i> Về trang chủ</a
+      >
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="content">
+      <h2 class="mb-4" data-aos="fade-down">Dashboard Thống Kê</h2>
+
+      <!-- Cards -->
+      <div class="row g-4">
+        <div class="col-md-3" data-aos="fade-up">
+          <div class="card p-3 shadow-sm">
+            <h5>Tổng người dùng</h5>
+            <h2 class="text-primary">{{ total_users }}</h2>
+          </div>
+        </div>
+
+        <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+          <div class="card p-3 shadow-sm">
+            <h5>Tổng Tour</h5>
+            <h2 class="text-success">{{ total_tours }}</h2>
+          </div>
+        </div>
+
+        <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+          <div class="card p-3 shadow-sm">
+            <h5>Tổng Booking</h5>
+            <h2 class="text-warning">{{ total_bookings }}</h2>
+          </div>
+        </div>
+
+        <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+          <div class="card p-3 shadow-sm">
+            <h5>Tổng Doanh thu</h5>
+            <h2 class="text-danger">${{ total_revenue|default:0|floatformat:0 }}</h2>
+          </div>
+        </div>
+      </div>
+
+      <!-- USERS TABLE -->
+      <div class="card mt-5 shadow-sm" data-aos="fade-up">
+        <div
+          class="card-header d-flex justify-content-between align-items-center"
+        >
+          <h5>Danh sách người dùng gần đây</h5>
+          <a href="/django-admin/users/user/add/" class="btn btn-primary btn-sm">
+            <i class="bi bi-plus"></i> Thêm người dùng
+          </a>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead class="table-dark">
+              <tr>
+                <th>ID</th>
+                <th>Tên</th>
+                <th>Email</th>
+                <th>Vai trò</th>
+                <th>Ngày tạo</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {% for user in recent_users %}
+              <tr>
+                <td>{{ user.user_id }}</td>
+                <td>{{ user.full_name }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                  <span class="badge bg-{% if user.role == 'admin' %}danger{% else %}secondary{% endif %}">
+                    {{ user.get_role_display }}
+                  </span>
+                </td>
+                <td>{{ user.created_at|date:"d/m/Y" }}</td>
+                <td>
+                  <a href="/django-admin/users/user/{{ user.user_id }}/change/" class="btn btn-sm btn-warning">Sửa</a>
+                  <a href="/django-admin/users/user/{{ user.user_id }}/delete/" class="btn btn-sm btn-danger">Xoá</a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll Top -->
+    <a
+      href="#"
+      id="scroll-top"
+      class="scroll-top d-flex align-items-center justify-content-center"
+    >
+      <i class="bi bi-arrow-up-short"></i>
+    </a>
+
+    <div id="preloader"></div>
+
+    <!-- Vendor JS -->
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'vendor/php-email-form/validate.js' %}"></script>
+    <script src="{% static 'vendor/aos/aos.js' %}"></script>
+    <script src="{% static 'vendor/purecounter/purecounter_vanilla.js' %}"></script>
+    <script src="{% static 'vendor/swiper/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'vendor/imagesloaded/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'vendor/glightbox/js/glightbox.min.js' %}"></script>
+
+    <!-- Main JS -->
+    <script src="{% static 'js/main.js' %}"></script>
+  </body>
+</html>

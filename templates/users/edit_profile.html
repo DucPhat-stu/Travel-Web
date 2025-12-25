@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Edit Profile{% endblock %}
+
+{% block body_class %}edit-profile-page{% endblock %}
+
+{% block content %}
+<main class="main">
+  <!-- Page Title -->
+  <div class="page-title" data-aos="fade">
+    <div class="heading">
+      <div class="container">
+        <div class="row d-flex justify-content-center text-center">
+          <div class="col-lg-8">
+            <h1>Edit Profile</h1>
+            <p class="mb-0">Manage your account settings, update your personal information, and share your travel experiences.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="breadcrumbs">
+      <div class="container">
+        <ol>
+          <li><a href="{% url 'core:home' %}">Home</a></li>
+          <li class="current">Edit Profile</li>
+        </ol>
+      </div>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <section id="edit-profile" class="edit-profile section">
+    <div class="container">
+      <div class="row">
+        <!-- Profile Edit Form -->
+        <div class="col-lg-6" data-aos="fade-up">
+          <h2>Edit Information</h2>
+          <form action="{% url 'users:edit_profile' %}" method="post" enctype="multipart/form-data" class="php-email-form">
+            {% csrf_token %}
+            <input type="hidden" name="form_type" value="profile">
+            <div class="row gy-4">
+              <div class="col-md-12 text-center">
+                {% if user.get_avatar_url %}
+                  <img src="{{ user.get_avatar_url }}" alt="Avatar" class="img-fluid rounded-circle mb-3" style="width: 150px; height: 150px; object-fit: cover;">
+                {% else %}
+                  <img src="{% static 'img/default-avatar.png' %}" alt="Avatar" class="img-fluid rounded-circle mb-3" style="width: 150px;">
+                {% endif %}
+                {{ profile_form.avatar }}
+              </div>
+              <div class="col-md-6">{{ profile_form.full_name }}</div>
+              <div class="col-md-6">{{ profile_form.phone }}</div>
+              <div class="col-md-12">{{ profile_form.address }}</div>
+              <div class="col-md-12">{{ profile_form.bio }}</div>
+              <div class="col-md-6">{{ profile_form.date_of_birth }}</div>
+              <div class="col-md-6">{{ profile_form.gender }}</div>
+            </div>
+            <div class="text-center"><button type="submit">Save Changes</button></div>
+          </form>
+        </div>
+
+        <!-- Change Password and Journal Form -->
+        <div class="col-lg-6">
+          <!-- Change Password Form -->
+          <div data-aos="fade-up" data-aos-delay="100">
+            <h2>Change Password</h2>
+            <form action="{% url 'users:edit_profile' %}" method="post" class="php-email-form">
+              {% csrf_token %}
+              <input type="hidden" name="form_type" value="password">
+              <div class="row gy-4">
+                <div class="col-md-12">{{ password_form.old_password }}</div>
+                <div class="col-md-6">{{ password_form.new_password }}</div>
+                <div class="col-md-6">{{ password_form.confirm_password }}</div>
+                <div class="col-md-12">{{ password_form.captcha }}</div>
+              </div>
+              <div class="text-center"><button type="submit">Change Password</button></div>
+            </form>
+          </div>
+
+          <!-- Journal Entry Form -->
+          <div data-aos="fade-up" data-aos-delay="200" class="mt-5">
+            <h2>My Journal</h2>
+            <form action="{% url 'users:edit_profile' %}" method="post" enctype="multipart/form-data" class="php-email-form">
+              {% csrf_token %}
+              <input type="hidden" name="form_type" value="post">
+              <div class="row gy-4">
+                <div class="col-md-12">{{ post_form.image }}</div>
+                <div class="col-md-12">{{ post_form.caption }}</div>
+                <div class="col-md-6">{{ post_form.location }}</div>
+                <div class="col-md-6">{{ post_form.rating }}</div>
+                <div class="col-md-12">{{ post_form.comment }}</div>
+              </div>
+              <div class="text-center"><button type="submit">Add to Journal</button></div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- User Posts -->
+      <div class="row mt-5">
+        <div class="col-lg-12">
+          <h2 class="text-center">My Travel Diary</h2>
+          <div class="row">
+            {% for post in posts %}
+            <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+              <div class="card mb-4">
+                <img src="{{ post.image.url }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{ post.location }}</h5>
+                  <p class="card-text">{{ post.caption }}</p>
+                  <p class="card-text"><small class="text-muted">Rating: {{ post.rating }}/5</small></p>
+                  <p class="card-text"><small class="text-muted">{{ post.comment }}</small></p>
+                  <p class="card-text"><small class="text-muted">{{ post.created_at|date:"F d, Y" }}</small></p>
+                </div>
+              </div>
+            </div>
+            {% empty %}
+            <p class="text-center">You haven't posted any journal entries yet.</p>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+{% endblock %}
